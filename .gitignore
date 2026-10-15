@@ -13,3 +13,5 @@ public/data/*
 .aws/
 
 .tools/
+
+.vercel/

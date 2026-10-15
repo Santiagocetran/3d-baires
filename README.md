@@ -78,3 +78,7 @@ Atribución: GCBA, Tejido Urbano, Parcelas/Frentes y Barrios. Recursos de Tejido
 El código original y la documentación de 3d-baires se publican bajo [MIT](LICENSE). Las partes adaptadas de Amsterdam conservan el copyright de alexbarakov y su [licencia MIT](licenses/amsterdam-by-building-MIT.txt).
 
 Los datos de GCBA, la cartografía de OpenStreetMap y las dependencias mantienen sus propias licencias; la licencia MIT del proyecto no las sustituye. Consultar [el manifiesto de fuentes y licencias](data/sources.json) para procedencia, atribución y discrepancias de metadatos. Los datos masivos se preparan localmente con los scripts indicados arriba.
+
+## Publicar en Vercel
+
+Con los datos locales preparados, `npm run prepare:vercel` crea el artefacto estático completo sin incluir los antecedentes MVT/GeoJSON. Ver [autenticación, despliegue y verificación](docs/deployment.md). Importar sólo el repositorio en Vercel no incluye los paquetes de datos.
