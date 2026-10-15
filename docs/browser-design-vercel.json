@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T16:14:42.233Z",
+  "base_url": "https://3d-baires.vercel.app",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "stadium_cards_verified": [
+    {
+      "name": "La Bombonera",
+      "club": "Boca Juniors"
+    },
+    {
+      "name": "El Monumental",
+      "club": "River Plate"
+    },
+    {
+      "name": "Pedro Bidegain",
+      "club": "San Lorenzo"
+    },
+    {
+      "name": "Tomás Adolfo Ducó",
+      "club": "Huracán"
+    },
+    {
+      "name": "José Amalfitani",
+      "club": "Vélez Sarsfield"
+    },
+    {
+      "name": "Diego Armando Maradona",
+      "club": "Argentinos Juniors"
+    },
+    {
+      "name": "Arquitecto Ricardo Etcheverri",
+      "club": "Ferro Carril Oeste"
+    },
+    {
+      "name": "Don León Kolbowski",
+      "club": "Atlanta"
+    }
+  ],
+  "stadium_cameras_match_official_points": true,
+  "football_filter_count": 8,
+  "total_places": 13,
+  "new_cultural_photos_loaded": true,
+  "animation_changes_pixels": true,
+  "animation_exact_settle": true,
+  "animation_clock_controlled": true,
+  "idle_render_stops": true,
+  "hover_card": true,
+  "pointer_bridge": true,
+  "keyboard_escape": true,
+  "click_pin": true,
+  "mobile_bounds": true,
+  "local_photo_loaded": true,
+  "resident_geometry_requests": 2,
+  "mask_screenshot": "data/processed/browser-check/caba-mask.png",
+  "mask_projection": {
+    "canvas": {
+      "x": 370,
+      "y": 0,
+      "width": 1070,
+      "height": 960,
+      "top": 0,
+      "right": 1440,
+      "bottom": 960,
+      "left": 370
+    },
+    "camera": {
+      "lng": "-58.425",
+      "lat": "-34.615974",
+      "zoom": "11.68",
+      "pitch": "0",
+      "bearing": "0",
+      "mode": "height"
+    }
+  },
+  "errors": [],
+  "request_failures": [],
+  "optional_basemap_failures": [
+    {
+      "url": "https://tile.openstreetmap.org/18/88561/157961.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88562/157959.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88567/157958.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88563/157958.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88555/157958.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88553/157959.png",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://tile.openstreetmap.org/18/88552/157960.png",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "geometry_requests": [
+    "https://3d-baires.vercel.app/data/city/pack0.bin.gz",
+    "https://3d-baires.vercel.app/data/city/pack1.bin.gz",
+    "https://3d-baires.vercel.app/data/city/pack0.bin.gz",
+    "https://3d-baires.vercel.app/data/city/pack1.bin.gz"
+  ],
+  "finished_at": "2026-10-15T16:15:24.361Z"
+}

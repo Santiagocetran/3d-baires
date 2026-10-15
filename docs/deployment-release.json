@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T16:13:16.180741+00:00",
+  "base_url": "https://3d-baires.vercel.app",
+  "source_commit": "1824fa8b2230dee222dee27c4e30e82c0fa69d20",
+  "files": [
+    {
+      "file": "index.html",
+      "bytes": 424,
+      "sha256": "7b59b9b04c87a659ce15ce3ea207e5a1f6791bc4081866cfe3c57c3b9b1e2774"
+    },
+    {
+      "file": "data/sources.json",
+      "bytes": 7702,
+      "sha256": "ad9e617d6af69155be162732294c2ab6d19cf18e29618641405b4df629b61fdd"
+    },
+    {
+      "file": "data/landmarks-sources.json",
+      "bytes": 26687,
+      "sha256": "d2edb204cf5e50d033283a62057f3187d6a01f193c70e7a7e7f20f45e666f9b0"
+    },
+    {
+      "file": "data/stadium-points.json",
+      "bytes": 4191,
+      "sha256": "3593acb867344ace9568e24b0b5d27fac834198b519e4180ca867b9bf5c1eda6"
+    },
+    {
+      "file": "data/city/city.json",
+      "bytes": 83936,
+      "sha256": "aab33af55185c38f912442111a88b2ee24b479ca7cc74e9c2a3fef7fb5ffa31b"
+    },
+    {
+      "file": "assets/index-BvR-GMjI.js",
+      "bytes": 1664378,
+      "sha256": "7d258b8409ab805fe51271fa5702d347de8a77f10de570cd38cfc097bf5b1d04"
+    },
+    {
+      "file": "assets/index-Dj8fpSDM.css",
+      "bytes": 93789,
+      "sha256": "25f0a52c0599cf308d5eb0971068fc44f6ff07532f484b0cf8c22eea065f169c"
+    },
+    {
+      "file": "data/city/pack-0.bin.gz",
+      "bytes": 4585678,
+      "sha256": "182ae181167de648c511baf71eac8aafcf2a438e7d553295881eb7e25f2361ea"
+    },
+    {
+      "file": "data/city/attrs/-1_-1.json.gz",
+      "bytes": 48025,
+      "sha256": "7ab307cbfe85f2193ad2b9b6e331ec20b1b61254385973c09d8ffc564108bbb6"
+    },
+    {
+      "file": "assets/amalfitani-DhthnyXl.jpg",
+      "bytes": 164736,
+      "sha256": "d672fda5628d898560c907c797455a63ee373c7cebb48b2c2a8fe8e9db7db40a"
+    },
+    {
+      "file": "assets/atlanta-CWM0ZRoM.jpg",
+      "bytes": 172028,
+      "sha256": "c62b94862e93d1068f47ed343353757cd4adbfd5814309e07b50288840d92003"
+    },
+    {
+      "file": "assets/barolo-BjZ3xQwV.jpg",
+      "bytes": 404164,
+      "sha256": "11b5d17b97dd3eb325061a876232f64fe561b81bb3b343a794efe85280b03835"
+    },
+    {
+      "file": "assets/bidegain-B7j4QLcZ.jpg",
+      "bytes": 142577,
+      "sha256": "a199c33ca851c20c8b92ec00bdad507e77662d67eb6919e2e668f566010c9e0c"
+    },
+    {
+      "file": "assets/bombonera-Du3yJj2Y.jpg",
+      "bytes": 238436,
+      "sha256": "c0c728f755b04d6c9761e4224d437309403384b87a64f72a9210d8f63bf18efd"
+    },
+    {
+      "file": "assets/cabildo-BX0fI054.jpg",
+      "bytes": 221886,
+      "sha256": "293918e7fc227c06d20aa681a4c875cf9fd2d04dd61880c19442f43e17f334b2"
+    },
+    {
+      "file": "assets/colon-BL-nXvdJ.jpg",
+      "bytes": 279618,
+      "sha256": "011752e2c63f5c8c6dc6ea970d4351d91b7e81f24b3231bcd4f4f45e04af7241"
+    },
+    {
+      "file": "assets/duco-B6E6LT2u.jpg",
+      "bytes": 127457,
+      "sha256": "84d424b5d1eac2b100b3e1fc51c15b861bc26eed6201c0174eab1be30ab3301d"
+    },
+    {
+      "file": "assets/ferro-D3B_T-W3.jpg",
+      "bytes": 111040,
+      "sha256": "12da05d70e9555ccb7b3fd377fc76cf493c14875e2836030518b8617264e2e9c"
+    },
+    {
+      "file": "assets/maradona-BzyFfS6T.jpg",
+      "bytes": 125299,
+      "sha256": "07d8dc1f7b9e2935e567a126b08948536f2ef47afd6d0892cd745ca240ebe79a"
+    },
+    {
+      "file": "assets/monumental-C2pgpMhJ.jpg",
+      "bytes": 139993,
+      "sha256": "3b1342c9868c4092213054e2fa87d4f654544238dd110861e19661294f79e620"
+    },
+    {
+      "file": "assets/obelisco-oefwZAzA.jpg",
+      "bytes": 311366,
+      "sha256": "81e464efed69f10dfb2b37dea2dde05901ad94f5d064c9b1488d99ef2db1c53f"
+    },
+    {
+      "file": "assets/rosada-8Juo-Mpd.jpg",
+      "bytes": 143062,
+      "sha256": "a043870ef36202ade41843e6842a9c99a212d12e9de69e3b6b20d13d3bbf0665"
+    },
+    {
+      "file": "assets/caba-boundary-g1Q7daQc.geojson",
+      "bytes": 368589,
+      "sha256": "3e167de0be4a4a2bab712f048f10af21157902d3063aa4e699b7368c6777979a"
+    },
+    {
+      "file": "LICENSE.txt",
+      "bytes": 1098,
+      "sha256": "0afdadcfbcc4e778402f6e2f7f5625bf6e8259b5811f8d9100aea5cc07abcdc1"
+    },
+    {
+      "file": "licenses/amsterdam-by-building-MIT.txt",
+      "bytes": 1068,
+      "sha256": "fd99f02c1c85ec732efa2b341574ba24862a6c09b728e6bc00b49fcc458275c1"
+    },
+    {
+      "file": "licenses/landmark-photos.md",
+      "bytes": 3382,
+      "sha256": "f7f9b7c45510945514ac11511a99944b2be0453574cfef982698aba8e3078c36"
+    }
+  ],
+  "missing_package_status": 404,
+  "photo_count": 13,
+  "manifest_expected": {
+    "blocks": 601,
+    "volumes": 1386616,
+    "packs": 13
+  },
+  "finished_at": "2026-10-15T16:13:23.859929+00:00",
+  "deployment_id": "dpl_GK6dS48HLpKPZnkGN3G91xWgey85",
+  "deployment_url": "https://3d-baires-249e3tqvy-santiagorcetran236-8862s-projects.vercel.app",
+  "artifact_files": 641,
+  "artifact_bytes": 85712633
+}

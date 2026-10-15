@@ -104,7 +104,7 @@ npm run prepare:vercel
 npx --yes vercel@64.2.0 deploy --prebuilt --prod
 ```
 
-`prepare:vercel` verifica los datos, ejecuta TypeScript/build y genera `.vercel/output/static` con la aplicación, geometría, atributos, límites, licencias y manifiesto de fuentes. Excluye crudos y antecedentes MVT/GeoJSON. El artefacto verificado del 2026-10-15 contiene 624 archivos y 82.689.903 bytes. `.vercel/` y las credenciales permanecen fuera de Git.
+`prepare:vercel` verifica los datos, ejecuta TypeScript/build y genera `.vercel/output/static` con la aplicación, geometría, atributos, límites, licencias y manifiesto de fuentes. Excluye crudos y antecedentes MVT/GeoJSON. El artefacto verificado del 2026-10-15 contiene 641 archivos y 85.712.633 bytes. `.vercel/` y las credenciales permanecen fuera de Git.
 
 La publicación se verificó sin autenticación: página y manifiesto accesibles, checksums coincidentes y 404 para un paquete inexistente. La [prueba remota de navegador](docs/browser-vercel.json) aprobó la carga de los 601 bloques, 1.386.616 volúmenes y 13 paquetes, el recorrido por cuatro barrios sin nuevas descargas de geometría y la vista completa de CABA. Se ejecutó con SwiftShader y teselas neutras: no mide rendimiento de hardware ni verifica el servicio externo de OSM.
 
