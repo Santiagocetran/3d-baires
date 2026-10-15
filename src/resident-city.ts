@@ -23,20 +23,17 @@ const vertex=/*glsl*/`
     vec4 a=texelFetch(uAttr,ivec2(i%256,i/256),0);
     vGid=a.y;
     vec3 p=position;
-    float seed=fract(sin(a.y*12.9898)*43758.5453);
-    float arrive=uReduced>0.5?1.0:clamp((uNow-uBorn)/0.9-seed*0.35,0.0,1.0);
+    // Seed is computed once per volume in the worker, never per vertex/frame.
+    float seed=a.z;
+    float arrive=uReduced>0.5?1.0:clamp((uNow-uBorn-seed*0.16)/1.1,0.0,1.0);
     float fly=1.0-arrive;
-    float e=fly*fly*fly;
-    float angle=seed*6.2831853;
-    // Visual entrance only. Final height is the published accepted height, unknown stays flat.
-    if(a.x>=0.0){
-      p.xz+=vec2(cos(angle),sin(angle))*(180.0+160.0*fract(seed*7.13))*e;
-      p.y+=(260.0+240.0*fract(seed*3.71))*e;
-    }
+    // Short vertical settling avoids the old 500m flight and excessive overlap.
+    // Visual effect only: final heights and unknown flat footprints are unchanged.
+    if(a.x>=0.0)p.y+=(28.0+seed*36.0)*fly*fly*fly;
     p.y*=uAltitude;
-    vec3 c=a.x<0.0?vec3(0.533,0.580,0.584):a.x<10.0?vec3(0.863,0.910,0.812):a.x<20.0?vec3(0.663,0.788,0.643):a.x<40.0?vec3(0.424,0.667,0.612):a.x<80.0?vec3(0.224,0.529,0.545):vec3(0.141,0.357,0.451);
+    vec3 c=a.x<0.0?vec3(0.49,0.57,0.65):a.x<10.0?vec3(1.0,0.79,0.24):a.x<20.0?vec3(1.0,0.57,0.27):a.x<40.0?vec3(0.97,0.32,0.38):a.x<80.0?vec3(0.84,0.29,0.58):vec3(0.48,0.32,0.84);
     if(uMode>0.5)c=vec3(0.682,0.722,0.725);
-    if(a.y==uSelected)c=vec3(0.90,0.42,0.21);
+    if(a.y==uSelected)c=vec3(0.15,0.85,1.0);
     vColor=c;
     vec4 w=modelMatrix*vec4(p,1.0);
     vWorld=w.xyz;
@@ -89,10 +86,12 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
   function fail(e:unknown,fatal=false){renderFatal ||= fatal;if(diagnostics.phase==='error'||disposed)return;diagnostics.phase='error';diagnostics.error=e instanceof Error?e.message:String(e);abort.abort();pool.forEach(w=>w.terminate());packs.clear();diagnostics.retainedPackBytes=0;selectionVersion++;emit();callbacks.error(diagnostics.error)}
   const progress=()=>{callbacks.progress(loaded,config.tiles.length);emit()};
   const attempt=()=>{diagnostics.requestAttempts++;emit()};
-  function makeMaterial(tex:THREE.DataTexture,pick:boolean,born:{value:number},altitude:number){
-    return new THREE.ShaderMaterial({glslVersion:THREE.GLSL3,uniforms:{...uniforms,uAttr:{value:tex},uBorn:born,uAltitude:{value:altitude}},
+  // One material per pass, rather than two ShaderMaterial instances per block.
+  function makeMaterial(pick:boolean){
+    return new THREE.ShaderMaterial({glslVersion:THREE.GLSL3,uniforms:{...uniforms,uAttr:{value:null},uBorn:{value:0},uAltitude:{value:1}},
       vertexShader:vertex,fragmentShader:fragment,defines:pick?{PICK:1}:{},side:THREE.DoubleSide,blending:THREE.NoBlending,toneMapped:false});
   }
+  const drawMaterial=makeMaterial(false),pickMaterial=makeMaterial(true);
   function addTile(m:MeshData,id:number){
     const t=config.tiles[id];
     if(!t||diagnostics.loadedBlockIds.includes(t.id))throw new Error('Respuesta worker incompatible con bloque');
@@ -101,15 +100,26 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
     const g=new THREE.BufferGeometry();
     g.setAttribute('position',new THREE.BufferAttribute(m.pos,3));g.setAttribute('bld',new THREE.BufferAttribute(m.bld,1));g.setIndex(new THREE.BufferAttribute(m.idx,1));
     // Full geometry always resident. Frustum culling only skips drawing, never evicts it.
-    g.computeBoundingSphere();g.boundingSphere!.radius+=650;
+    // Bounds were accumulated during triangulation in the worker: no full vertex
+    // scan on the UI thread. Altitude correction is applied below.
+    g.boundingSphere=new THREE.Sphere(new THREE.Vector3(...m.bounds.center),m.bounds.radius);
     const data=new Float32Array(WIDTH*Math.ceil(m.nB/WIDTH)*4);data.set(m.attr);
     const tex=new THREE.DataTexture(data,WIDTH,Math.ceil(m.nB/WIDTH),THREE.RGBAFormat,THREE.FloatType);tex.needsUpdate=true;
-    const born={value:performance.now()/1000};animateUntil=Math.max(animateUntil,born.value+1.4);
+    const born={value:-1};
     const lat=new maplibregl.MercatorCoordinate(origin.x,origin.y+(m.origin[1]+300)*scale).toLngLat().lat;
     const altitude=maplibregl.MercatorCoordinate.fromLngLat([config.origin[0],lat]).meterInMercatorCoordinateUnits()/scale;
-    const mesh=new THREE.Mesh(g,makeMaterial(tex,false,born,altitude));
+    g.boundingSphere.center.y*=altitude;g.boundingSphere.radius*=Math.max(1,altitude);
+    const restRadius=g.boundingSphere.radius;
+    const mesh=new THREE.Mesh(g,drawMaterial);
     mesh.position.set(m.origin[0],0,m.origin[1]);
-    mesh.userData={draw:mesh.material,pick:makeMaterial(tex,true,born,altitude),tex,born};
+    mesh.userData={draw:drawMaterial,pick:pickMaterial,tex,born,restRadius};
+    mesh.onBeforeRender=(_renderer,_scene,_camera,_geometry,material)=>{
+      // Start on the first actual draw; offscreen blocks don't consume animation time.
+      if(born.value<0){born.value=uniforms.uNow.value;animateUntil=Math.max(animateUntil,born.value+1.3)}
+      const mat=material as THREE.ShaderMaterial;
+      mat.uniforms.uAttr.value=tex;mat.uniforms.uBorn.value=born.value;mat.uniforms.uAltitude.value=altitude;
+      mat.uniformsNeedUpdate=true;
+    };
     for(const gid of m.gids)rowToTile[gid]=id+1;
     scene.add(mesh);meshes.push(mesh);
     diagnostics.loadedBlocks++;diagnostics.loadedVolumes+=m.nB;diagnostics.loadedBlockIds.push(t.id);diagnostics.bufferBytes+=m.pos.byteLength+m.bld.byteLength+m.idx.byteLength+data.byteLength;map.triggerRepaint();
@@ -188,6 +198,7 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
       renderer.resetState();
       renderer.setViewport(0,0,map.getCanvas().width,map.getCanvas().height);
       if(queuedPick&&diagnostics.phase!=='error'){const e=queuedPick;queuedPick=undefined;pick(e);renderer.resetState()}
+      for(const mesh of meshes)mesh.geometry.boundingSphere!.radius=mesh.userData.restRadius+(uniforms.uReduced.value===0&&(mesh.userData.born.value<0||uniforms.uNow.value-mesh.userData.born.value<1.3)?80:0);
       renderer.render(scene,camera);
       if(renderFatal)return;
       diagnostics.renders++;if(diagnostics.phase==='loading'&&loaded===config.tiles.length&&diagnostics.loadedVolumes===config.source_records&&diagnostics.validatedPacks.length===config.packs.length){diagnostics.phase='ready';emit();}
@@ -197,8 +208,8 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
     onRemove(){
       disposed=true;if(diagnostics.phase!=='error')diagnostics.phase='disposed';diagnostics.retainedPackBytes=0;emit();abort.abort();selectionVersion++;pool.forEach(w=>w.terminate());packs.clear();attrsCache.clear();
       map.getCanvas().removeEventListener('webglcontextlost',onContextLost,true);map.off('click',onClick);media.removeEventListener('change',onMotion);
-      for(const mesh of meshes){mesh.geometry.dispose();mesh.userData.draw.dispose();mesh.userData.pick.dispose();mesh.userData.tex.dispose()}
-      scene.clear();pickTarget.dispose();renderer?.dispose();
+      for(const mesh of meshes){mesh.geometry.dispose();mesh.userData.tex.dispose()}
+      drawMaterial.dispose();pickMaterial.dispose();scene.clear();pickTarget.dispose();renderer?.dispose();
     }
   };
   return {layer,getDiagnostics:snapshot,setMode(mode:'height'|'year'){uniforms.uMode.value=mode==='year'?1:0;map?.triggerRepaint()},

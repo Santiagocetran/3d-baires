@@ -1,0 +1,483 @@
+{
+  "reviewed_at": "2026-10-15",
+  "notes": "Puntos curados: Turismo BA y catálogo GCBA de estadios. Sin fechas/alturas propagadas a volúmenes. Coordenadas de estadios transformadas desde EPSG:9498; catálogo actualizado no equivale a observación. Fotos con licencias independientes de MIT.",
+  "places": [
+    {
+      "id": "obelisco",
+      "retrieved_at": "2026-10-15",
+      "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/obelisco",
+      "source_sha256": "badc53cce6057b0244a0d282d3ce1bb566b9524422f149387d13777aef6a22fc",
+      "coordinates": {
+        "lat": -34.60361111,
+        "lon": -58.38166667
+      },
+      "coordinate_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Obelisco_de_Buenos_Aires",
+      "coordinate_method": "Punto de referencia enciclopédico; no huella ni identificación de volumen catastral",
+      "photo": {
+        "file": "src/assets/landmarks/obelisco.jpg",
+        "source_id": "File:Buenos Aires (20234294752).jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Buenos_Aires_(20234294752).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Buenos_Aires_%2820234294752%29.jpg/960px-Buenos_Aires_%2820234294752%29.jpg",
+        "sha256": "81e464efed69f10dfb2b37dea2dde05901ad94f5d064c9b1488d99ef2db1c53f",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "artist_html": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/45653662@N06\">Rodrigo Paredes</a> from Ciudad Autónoma de Buenos Aires, Argentina",
+        "modifications": "Archivo thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      }
+    },
+    {
+      "id": "rosada",
+      "retrieved_at": "2026-10-15",
+      "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-de-gobierno-casa-rosada",
+      "source_sha256": "cd033b9b4dea3b69c37d9143fd3306e9da5ba2b7b1c38611d778a925147f0c8d",
+      "coordinates": {
+        "lat": -34.60805556,
+        "lon": -58.37027778
+      },
+      "coordinate_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Casa_Rosada",
+      "coordinate_method": "Punto de referencia enciclopédico; no huella ni identificación de volumen catastral",
+      "photo": {
+        "file": "src/assets/landmarks/rosada.jpg",
+        "source_id": "File:Casa Rosada exterior from Plaza de Mayo.JPG",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Casa_Rosada_exterior_from_Plaza_de_Mayo.JPG",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Casa_Rosada_exterior_from_Plaza_de_Mayo.JPG/960px-Casa_Rosada_exterior_from_Plaza_de_Mayo.JPG",
+        "sha256": "a043870ef36202ade41843e6842a9c99a212d12e9de69e3b6b20d13d3bbf0665",
+        "license": "CC BY-SA 3.0 nl",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/nl/deed.en",
+        "artist_html": "Lars Curfs <small>(<a href=\"https://nl.wikipedia.org/wiki/User:Grashoofd\" class=\"extiw\" title=\"nl:User:Grashoofd\">Grashoofd</a>)</small>",
+        "modifications": "Archivo thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      }
+    },
+    {
+      "id": "colon",
+      "retrieved_at": "2026-10-15",
+      "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/teatro-col%C3%B3n",
+      "source_sha256": "4c85bf3f85d3f6305d562c34656261df0fc919ebc9ded9824798054263b1ae97",
+      "coordinates": {
+        "lat": -34.60108333,
+        "lon": -58.38308333
+      },
+      "coordinate_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Teatro_Col%C3%B3n",
+      "coordinate_method": "Punto de referencia enciclopédico; no huella ni identificación de volumen catastral",
+      "photo": {
+        "file": "src/assets/landmarks/colon.jpg",
+        "source_id": "File:Fachada del Teatro Colón en Buenos Aires, Argentina.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Fachada_del_Teatro_Col%C3%B3n_en_Buenos_Aires,_Argentina.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Fachada_del_Teatro_Col%C3%B3n_en_Buenos_Aires%2C_Argentina.jpg/960px-Fachada_del_Teatro_Col%C3%B3n_en_Buenos_Aires%2C_Argentina.jpg",
+        "sha256": "011752e2c63f5c8c6dc6ea970d4351d91b7e81f24b3231bcd4f4f45e04af7241",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "artist_html": "<a href=\"//commons.wikimedia.org/wiki/User:EEJCC\" title=\"User:EEJCC\">EEJCC</a>",
+        "modifications": "Archivo thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      }
+    },
+    {
+      "id": "bombonera",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.636526034828,
+        "lon": -58.36487074869019
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/bombonera.jpg",
+        "source_id": "File:Vista aérea del Estadio Alberto J. Armando \"La Bombonera\" 01.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Vista_a%C3%A9rea_del_Estadio_Alberto_J._Armando_%22La_Bombonera%22_01.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Vista_a%C3%A9rea_del_Estadio_Alberto_J._Armando_%22La_Bombonera%22_01.jpg/960px-Vista_a%C3%A9rea_del_Estadio_Alberto_J._Armando_%22La_Bombonera%22_01.jpg",
+        "sha256": "c0c728f755b04d6c9761e4224d437309403384b87a64f72a9210d8f63bf18efd",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "<a href=\"//commons.wikimedia.org/wiki/User:ProtoplasmaKid\" title=\"User:ProtoplasmaKid\">ProtoplasmaKid</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "bombonera",
+        "source_id": 103,
+        "source_name": "Alberto J. Armando",
+        "source_club": "Club Atletico Boca Juniors",
+        "source_address": "Brandsen 805",
+        "source_neighbourhood": "Boca",
+        "original_coordinates": [
+          29025.85231816901,
+          69190.9161168341
+        ],
+        "coordinates": [
+          -58.36487074869019,
+          -34.636526034828
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/La%20Bombonera"
+    },
+    {
+      "id": "monumental",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.546519936368455,
+        "lon": -58.44938774405304
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/monumental.jpg",
+        "source_id": "File:Estadio mas monumental.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_mas_monumental.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Estadio_mas_monumental.jpg/960px-Estadio_mas_monumental.jpg",
+        "sha256": "3b1342c9868c4092213054e2fa87d4f654544238dd110861e19661294f79e620",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "artist_html": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Dibumartinez23&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Dibumartinez23 (page does not exist)\">Dibumartinez23</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "monumental",
+        "source_id": 114,
+        "source_name": "Monumental Antonio Vespucio Liberti",
+        "source_club": "Club Atletico River Plate",
+        "source_address": "Figueroa Alcorta, Pres. Av. 7597",
+        "source_neighbourhood": "Belgrano",
+        "original_coordinates": [
+          21277.864866538723,
+          79179.89127670175
+        ],
+        "coordinates": [
+          -58.44938774405304,
+          -34.546519936368455
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Monumental%20%28Buenos%20Aires%29"
+    },
+    {
+      "id": "bidegain",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.65204182105556,
+        "lon": -58.440222798444914
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/bidegain.jpg",
+        "source_id": "File:Platea Este Nuevo Gasometro 1.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Platea_Este_Nuevo_Gasometro_1.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Platea_Este_Nuevo_Gasometro_1.jpg/960px-Platea_Este_Nuevo_Gasometro_1.jpg",
+        "sha256": "a199c33ca851c20c8b92ec00bdad507e77662d67eb6919e2e668f566010c9e0c",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Nicocuervo95?action=edit&amp;redlink=1\" title=\"User:Nicocuervo95 (page does not exist)\" class=\"new\" typeof=\"mw:LocalizedAttrs\" data-mw-i18n='{\"title\":{\"lang\":\"x-page\",\"key\":\"red-link-title\",\"params\":[\"User:Nicocuervo95\"]}}'>Nicocuervo95</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "bidegain",
+        "source_id": 115,
+        "source_name": "Pedro Bidegain",
+        "source_club": "Club Atletico San Lorenzo de Almagro",
+        "source_address": "Varela Av. y Moreno, Perito Av.",
+        "source_neighbourhood": "Flores",
+        "original_coordinates": [
+          22116.427251623467,
+          67473.85114706572
+        ],
+        "coordinates": [
+          -58.440222798444914,
+          -34.65204182105556
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Pedro%20Bidegain"
+    },
+    {
+      "id": "duco",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.64321239630219,
+        "lon": -58.39714861808475
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/duco.jpg",
+        "source_id": "File:Estadio huracan interior tribuna gcba.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_huracan_interior_tribuna_gcba.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Estadio_huracan_interior_tribuna_gcba.jpg/960px-Estadio_huracan_interior_tribuna_gcba.jpg",
+        "sha256": "84d424b5d1eac2b100b3e1fc51c15b861bc26eed6201c0174eab1be30ab3301d",
+        "license": "CC BY 2.5 ar",
+        "license_url": "https://creativecommons.org/licenses/by/2.5/ar/deed.en",
+        "artist_html": "Unknown author<link rel=\"mw:PageProp/Category\" href=\"./Category:Template_Unknown_(author)\"><span style=\"display: none;\">Unknown author</span>",
+        "credit_html": "<a rel=\"mw:ExtLink nofollow\" href=\"https://turismo.buenosaires.gob.ar/es/atractivo/estadios-emblem%C3%A1ticos-1-estadio-%E2%80%9Cel-palacio-duc%C3%B3%E2%80%9D\" class=\"external text\">here</a>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "duco",
+        "source_id": 56,
+        "source_name": "Tomás Adolfo Ducó",
+        "source_club": "Club Atlético Huracán",
+        "source_address": "Alcorta, Amancio Av. 2570",
+        "source_neighbourhood": "Parque Patricios",
+        "original_coordinates": [
+          26065.806603887693,
+          68451.5873487011
+        ],
+        "coordinates": [
+          -58.39714861808475,
+          -34.64321239630219
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Tom%C3%A1s%20Adolfo%20Duc%C3%B3"
+    },
+    {
+      "id": "amalfitani",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.6338585808103,
+        "lon": -58.51941954327907
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/amalfitani.jpg",
+        "source_id": "File:Estadio José Amalfitani 2024.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_Jos%C3%A9_Amalfitani_2024.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Estadio_Jos%C3%A9_Amalfitani_2024.jpg/960px-Estadio_Jos%C3%A9_Amalfitani_2024.jpg",
+        "sha256": "d672fda5628d898560c907c797455a63ee373c7cebb48b2c2a8fe8e9db7db40a",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "artist_html": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Gonzabar77&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Gonzabar77 (page does not exist)\">Gonzabar77</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "amalfitani",
+        "source_id": 119,
+        "source_name": "José Amalfitani",
+        "source_club": "Club Atletico Velez Sarsfield",
+        "source_address": "Justo, Juan B. Av. 9200",
+        "source_neighbourhood": "Liniers",
+        "original_coordinates": [
+          14855.107148597028,
+          69489.80218575538
+        ],
+        "coordinates": [
+          -58.51941954327907,
+          -34.6338585808103
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Jos%C3%A9%20Amalfitani"
+    },
+    {
+      "id": "maradona",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.60628207257581,
+        "lon": -58.47302898040723
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/maradona.jpg",
+        "source_id": "File:Estadio argentinos juniors.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_argentinos_juniors.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Estadio_argentinos_juniors.jpg/960px-Estadio_argentinos_juniors.jpg",
+        "sha256": "07d8dc1f7b9e2935e567a126b08948536f2ef47afd6d0892cd745ca240ebe79a",
+        "license": "CC BY 2.5 ar",
+        "license_url": "https://creativecommons.org/licenses/by/2.5/ar/deed.en",
+        "artist_html": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+        "credit_html": "<a rel=\"nofollow\" class=\"external text\" href=\"https://turismo.buenosaires.gob.ar/es/otros-establecimientos/club-argentinos-juniors\">here</a>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "maradona",
+        "source_id": 16,
+        "source_name": "Diego Armando Maradona",
+        "source_club": "Asociacion Atletica Argentinos Juniors",
+        "source_address": "Gavilan 2151",
+        "source_neighbourhood": "Villa Gral. Mitre",
+        "original_coordinates": [
+          19108.499338660953,
+          72550.35318694686
+        ],
+        "coordinates": [
+          -58.47302898040723,
+          -34.60628207257581
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Diego%20Armando%20Maradona"
+    },
+    {
+      "id": "ferro",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.61858888573242,
+        "lon": -58.447689551176666
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/ferro.jpg",
+        "source_id": "File:Estadio Ferro 2023.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_Ferro_2023.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Estadio_Ferro_2023.jpg/960px-Estadio_Ferro_2023.jpg",
+        "sha256": "12da05d70e9555ccb7b3fd377fc76cf493c14875e2836030518b8617264e2e9c",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "Facundo Diez",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "ferro",
+        "source_id": 140,
+        "source_name": "Arquitecto Ricardo Etcheverri",
+        "source_club": "Club Ferrocarril Oeste",
+        "source_address": "Avellaneda Av. 1240",
+        "source_neighbourhood": "Caballito",
+        "original_coordinates": [
+          21432.5031764719,
+          71185.04748520025
+        ],
+        "coordinates": [
+          -58.447689551176666,
+          -34.61858888573242
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio%20Arquitecto%20Ricardo%20Etcheverry"
+    },
+    {
+      "id": "barolo",
+      "retrieved_at": "2026-10-15",
+      "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/palacio-barolo",
+      "source_sha256": "5cb2cd7542888141260afbbeb54e352f8c25c59cd588cc088c09f085eddcabe0",
+      "coordinates": {
+        "lat": -34.60955556,
+        "lon": -58.38586111
+      },
+      "coordinate_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Palacio%20Barolo",
+      "coordinate_method": "Punto de referencia enciclopédico; no identidad de volumen catastral",
+      "photo": {
+        "file": "src/assets/landmarks/barolo.jpg",
+        "source_id": "File:Palacio Barolo 10.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Palacio_Barolo_10.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Palacio_Barolo_10.jpg/960px-Palacio_Barolo_10.jpg",
+        "sha256": "11b5d17b97dd3eb325061a876232f64fe561b81bb3b343a794efe85280b03835",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "<a href=\"//commons.wikimedia.org/wiki/User:Eugenio_Hansen,_OFS\" title=\"User:Eugenio Hansen, OFS\">Eugenio Hansen, OFS</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      }
+    },
+    {
+      "id": "cabildo",
+      "retrieved_at": "2026-10-15",
+      "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/el-cabildo",
+      "source_sha256": "b8a0637189e490977abff535d2713ab0588191e3329b90e778ddb456e689fb50",
+      "coordinates": {
+        "lat": -34.60888889,
+        "lon": -58.37361111
+      },
+      "coordinate_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Cabildo%20of%20Buenos%20Aires",
+      "coordinate_method": "Punto de referencia enciclopédico; no identidad de volumen catastral",
+      "photo": {
+        "file": "src/assets/landmarks/cabildo.jpg",
+        "source_id": "File:Cabildo de Buenos Aires 2023.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Cabildo_de_Buenos_Aires_2023.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Cabildo_de_Buenos_Aires_2023.jpg/960px-Cabildo_de_Buenos_Aires_2023.jpg",
+        "sha256": "293918e7fc227c06d20aa681a4c875cf9fd2d04dd61880c19442f43e17f334b2",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Fernando\" title=\"User:Fernando\">Fernando</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      }
+    },
+    {
+      "id": "atlanta",
+      "retrieved_at": "2026-10-15",
+      "source": "https://data.buenosaires.gob.ar/dataset/estadios/resource/05949d0c-c768-43cf-941a-38db746a8579",
+      "source_sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+      "coordinates": {
+        "lat": -34.595108320227375,
+        "lon": -58.448522656883
+      },
+      "coordinate_source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+      "coordinate_method": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+      "photo": {
+        "file": "src/assets/landmarks/atlanta.jpg",
+        "source_id": "File:Estadio Don León Kolbowsky (Club Atlético Atlanta).jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Estadio_Don_Le%C3%B3n_Kolbowsky_(Club_Atl%C3%A9tico_Atlanta).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Estadio_Don_Le%C3%B3n_Kolbowsky_%28Club_Atl%C3%A9tico_Atlanta%29.jpg/960px-Estadio_Don_Le%C3%B3n_Kolbowsky_%28Club_Atl%C3%A9tico_Atlanta%29.jpg",
+        "sha256": "c62b94862e93d1068f47ed343353757cd4adbfd5814309e07b50288840d92003",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "artist_html": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Ulises_Icardi\" title=\"User:Ulises Icardi\">Ulises Icardi</a>",
+        "credit_html": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "modifications": "Thumbnail de Commons sin editar; object-fit:cover en la interfaz"
+      },
+      "source_record": {
+        "id": "atlanta",
+        "source_id": 55,
+        "source_name": "Don León Kolbowsky",
+        "source_club": "Club Atlético Atlanta",
+        "source_address": "Humboldt 374",
+        "source_neighbourhood": "Villa Crespo",
+        "original_coordinates": [
+          21356.481037122932,
+          73789.83773675615
+        ],
+        "coordinates": [
+          -58.448522656883,
+          -34.595108320227375
+        ]
+      },
+      "source_crs": "EPSG:9498",
+      "license": "CC-BY-2.5-AR",
+      "catalogue_updated_at": "2026-06-18",
+      "observation_date": null,
+      "supplementary_source": "https://en.wikipedia.org/api/rest_v1/page/summary/Estadio_Don_Le%C3%B3n_Kolbowski"
+    }
+  ]
+}

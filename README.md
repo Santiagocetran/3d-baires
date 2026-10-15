@@ -8,7 +8,7 @@ La versión pública funciona sin cuenta ni API key. Incluye **1.386.616 volúme
 
 El motor de edificios adapta la arquitectura de [Amsterdam, building by building](https://github.com/alexbarakov/amsterdam-by-building): paquetes binarios, workers, mallas Three.js persistentes, animación en GPU y selección por identificador. React conserva la interfaz y MapLibre la cámara y el mapa base. Licencia MIT y atribución conservadas en `licenses/`. Ver `docs/amsterdam-architecture.md`.
 
-**Antigüedad:** Tejido no contiene años de construcción. Gris significa desconocido. No hay mapa de calor de edades verificadas todavía. Historias fuera de la interfaz.
+**Antigüedad:** Tejido no contiene años de construcción. Gris significa desconocido. No hay mapa de calor de edades verificadas todavía. Las fichas de lugares destacados son puntos independientes: no asignan años ni identidad a los volúmenes catastrales.
 
 ## Preparar y ejecutar
 
@@ -37,6 +37,12 @@ Abrir **http://localhost:5173** en ese equipo. No se expone el servidor a intern
 
 Arrastrar mueve; rueda o +/− acercan; botón derecho y arrastre giran/inclinan. El selector salta a cualquier barrio; «Ver toda CABA» encuadra los límites oficiales. La URL conserva cámara y capa; «Copiar enlace de esta vista» permite compartirlas. En móvil el panel se puede contraer. El indicador muestra preparación global de la ciudad, no nuevas descargas por viewport. Los bloques cargados permanecen y sólo se omite su dibujo cuando están fuera de cámara. «Animar volúmenes» repite la llegada visual; no representa historia constructiva. Se respeta movimiento reducido.
 
+La interfaz usa un panel azul, edificios por altura en amarillo/coral/violeta y OSM a color con mayor saturación (también en parques). El exterior de CABA queda oculto por una máscara celeste con el contorno oficial, sin recortar ni alterar la geometría residente. `src/assets/caba-boundary.geojson` se obtiene de la unión sin simplificar de los 48 barrios; si cambian sus límites, regenerar con `.venv/bin/python scripts/map-boundary.py`. El archivo conserva el checksum de entrada.
+
+Los símbolos ✦ muestran fotos y datos de **13 lugares**: Teatro Colón, Casa Rosada, Obelisco, Cabildo, Palacio Barolo y ocho estadios (Boca, River, San Lorenzo, Huracán, Vélez, Argentinos Juniors, Ferro y Atlanta) al pasar el mouse o enfocar con teclado. Clic/toque fija la ficha; × o Escape la cierran. También hay accesos en «Lugares para descubrir», con lista desplazable y filtro «Fútbol» que muestra sólo estadios tanto en la lista como en el mapa. Se ocultan los símbolos al alejarse (zoom < 14), sin ocultar los edificios. Los ocho estadios usan puntos y direcciones del catálogo oficial GCBA (CC BY 2.5 AR), transformados de EPSG:9498 a WGS84 con ejes explícitos. `data/stadium-points.json` conserva los IDs y coordenadas originales; `.venv/bin/python scripts/landmark_stadiums.py` reproduce la transformación y descarga el recurso sólo si no existe en `data/raw/`. La actualización del catálogo no se presenta como fecha de observación. Son puntos de interés independientes, sin identidad catastral verificada: no se asocian automáticamente a las mallas ni se propagan fechas/alturas. Fuentes oficiales, procedencia de coordenadas y checksums de fotografías en `data/landmarks-sources.json`; créditos/licencias en cada ficha. Las fotos se sirven localmente y sus licencias son independientes de MIT.
+
+La animación usa una llegada vertical breve en GPU: semilla por volumen y límites calculados en el worker, dos materiales compartidos para dibujo/selección y comienzo en el primer dibujo visible. El reposo no solicita frames continuos. Son cambios para reducir trabajo y superposición; falta medir FPS en hardware real.
+
 El mapa base OSM es opcional y requiere internet. Sus teselas sí cambian al navegar. Los edificios y límites se sirven como archivos estáticos desde Vercel en la versión pública o desde el servidor local durante el desarrollo, sin backend. El cliente detecta la firma gzip en los bytes recibidos: admite archivos comprimidos y servidores con `Content-Encoding: gzip` (Fetch ya los descomprime). Valida tamaños y estructura antes de generar mallas. Los errores terminales muestran un botón para recargar; errores de atributos permiten seguir explorando.
 
 ## Verificar
@@ -56,10 +62,11 @@ Prueba en navegador con una muestra de **800 volúmenes reales**, aislada median
 npx playwright install chromium
 npm run test:browser
 npm run test:browser:negative
+npm run test:browser:design
 npm run test:browser:city
 ```
 
-Para un Chromium ya instalado: `CHROMIUM_PATH=/ruta/al/ejecutable npm run test:browser`. Mantener `npm run dev` abierto durante las pruebas. `test:browser` usa la muestra para selección conocida, móvil y controles; `test:browser:negative` inyecta errores después de una carga parcial. `test:browser:city` usa toda la entrega local y exige conjuntos exactos de bloques/paquetes, volúmenes completos y continuidad al navegar. Los informes `docs/browser-*.json` registran `running`, `passed` o `failed`, incluso ante fallos de lanzamiento. Son pruebas funcionales con SwiftShader, no benchmarks de hardware.
+Para un Chromium ya instalado: `CHROMIUM_PATH=/ruta/al/ejecutable npm run test:browser`. Mantener `npm run dev` abierto durante las pruebas. `test:browser` usa la muestra para selección conocida, móvil y controles; `test:browser:negative` inyecta errores después de una carga parcial. `test:browser:city` usa toda la entrega local y exige conjuntos exactos de bloques/paquetes, volúmenes completos y continuidad al navegar. Los informes `docs/browser-*.json` registran `running`, `passed` o `failed`, incluso ante fallos de lanzamiento. `test:browser:design` verifica hover hacia la ficha, permanencia por clic, Escape, teclado, foto local y encuadre móvil, movimiento real por píxeles, retorno exacto a reposo y detención de frames; guarda capturas locales y `docs/browser-design.json`. Son pruebas funcionales con SwiftShader, no benchmarks de hardware.
 
 Para verificar el build de producción localmente: `npm run build`, luego `npm run preview` en otra terminal y `BROWSER_BASE_URL=http://127.0.0.1:4173 BROWSER_REPORT=docs/browser-preview.json npm run test:browser:city`. `CHROMIUM_PATH` también se aplica a esa orden. El timeout completo predeterminado es 10 minutos; puede ajustarse con `CITY_TIMEOUT_MS`.
 

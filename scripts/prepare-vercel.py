@@ -33,7 +33,8 @@ def prepare():
         shutil.copy2(source, destination)
     shutil.copy2(ROOT / 'LICENSE', static / 'LICENSE.txt')
     shutil.copytree(ROOT / 'licenses', static / 'licenses')
-    shutil.copy2(ROOT / 'data/sources.json', static / 'data/sources.json')
+    for name in ['sources.json', 'landmarks-sources.json', 'stadium-points.json']:
+        shutil.copy2(ROOT / 'data' / name, static / 'data' / name)
     # Fixed data filenames must revalidate after deployment; Vite assets have content hashes.
     config = {'version': 3, 'routes': [
         {'src': '/assets/(.*)', 'headers': {'Cache-Control': 'public, max-age=31536000, immutable'}, 'continue': True},

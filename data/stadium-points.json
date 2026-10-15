@@ -1,0 +1,144 @@
+{
+  "source": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/vicejefatura-de-gobierno/estadios/estadios.geojson",
+  "catalogue_url": "https://data.buenosaires.gob.ar/dataset/estadios",
+  "resource_id": "05949d0c-c768-43cf-941a-38db746a8579",
+  "retrieved_at": "2026-10-15",
+  "catalogue_updated_at": "2026-06-18",
+  "observation_date": null,
+  "license": "CC-BY-2.5-AR",
+  "license_url": "https://creativecommons.org/licenses/by/2.5/ar/",
+  "sha256": "2808bdc251d689e5ecc3866c9eba95a894edc0d62c1a3b111bf22c6d981c6d92",
+  "source_crs": "EPSG:9498",
+  "output_crs": "EPSG:4326",
+  "transformation": "pyproj Transformer.from_crs(9498,4326,always_xy=True); puntos de referencia, sin asociación a volúmenes",
+  "places": [
+    {
+      "id": "bombonera",
+      "source_id": 103,
+      "source_name": "Alberto J. Armando",
+      "source_club": "Club Atletico Boca Juniors",
+      "source_address": "Brandsen 805",
+      "source_neighbourhood": "Boca",
+      "original_coordinates": [
+        29025.85231816901,
+        69190.9161168341
+      ],
+      "coordinates": [
+        -58.36487074869019,
+        -34.636526034828
+      ]
+    },
+    {
+      "id": "monumental",
+      "source_id": 114,
+      "source_name": "Monumental Antonio Vespucio Liberti",
+      "source_club": "Club Atletico River Plate",
+      "source_address": "Figueroa Alcorta, Pres. Av. 7597",
+      "source_neighbourhood": "Belgrano",
+      "original_coordinates": [
+        21277.864866538723,
+        79179.89127670175
+      ],
+      "coordinates": [
+        -58.44938774405304,
+        -34.546519936368455
+      ]
+    },
+    {
+      "id": "bidegain",
+      "source_id": 115,
+      "source_name": "Pedro Bidegain",
+      "source_club": "Club Atletico San Lorenzo de Almagro",
+      "source_address": "Varela Av. y Moreno, Perito Av.",
+      "source_neighbourhood": "Flores",
+      "original_coordinates": [
+        22116.427251623467,
+        67473.85114706572
+      ],
+      "coordinates": [
+        -58.440222798444914,
+        -34.65204182105556
+      ]
+    },
+    {
+      "id": "duco",
+      "source_id": 56,
+      "source_name": "Tomás Adolfo Ducó",
+      "source_club": "Club Atlético Huracán",
+      "source_address": "Alcorta, Amancio Av. 2570",
+      "source_neighbourhood": "Parque Patricios",
+      "original_coordinates": [
+        26065.806603887693,
+        68451.5873487011
+      ],
+      "coordinates": [
+        -58.39714861808475,
+        -34.64321239630219
+      ]
+    },
+    {
+      "id": "amalfitani",
+      "source_id": 119,
+      "source_name": "José Amalfitani",
+      "source_club": "Club Atletico Velez Sarsfield",
+      "source_address": "Justo, Juan B. Av. 9200",
+      "source_neighbourhood": "Liniers",
+      "original_coordinates": [
+        14855.107148597028,
+        69489.80218575538
+      ],
+      "coordinates": [
+        -58.51941954327907,
+        -34.6338585808103
+      ]
+    },
+    {
+      "id": "maradona",
+      "source_id": 16,
+      "source_name": "Diego Armando Maradona",
+      "source_club": "Asociacion Atletica Argentinos Juniors",
+      "source_address": "Gavilan 2151",
+      "source_neighbourhood": "Villa Gral. Mitre",
+      "original_coordinates": [
+        19108.499338660953,
+        72550.35318694686
+      ],
+      "coordinates": [
+        -58.47302898040723,
+        -34.60628207257581
+      ]
+    },
+    {
+      "id": "ferro",
+      "source_id": 140,
+      "source_name": "Arquitecto Ricardo Etcheverri",
+      "source_club": "Club Ferrocarril Oeste",
+      "source_address": "Avellaneda Av. 1240",
+      "source_neighbourhood": "Caballito",
+      "original_coordinates": [
+        21432.5031764719,
+        71185.04748520025
+      ],
+      "coordinates": [
+        -58.447689551176666,
+        -34.61858888573242
+      ]
+    },
+    {
+      "id": "atlanta",
+      "source_id": 55,
+      "source_name": "Don León Kolbowsky",
+      "source_club": "Club Atlético Atlanta",
+      "source_address": "Humboldt 374",
+      "source_neighbourhood": "Villa Crespo",
+      "original_coordinates": [
+        21356.481037122932,
+        73789.83773675615
+      ],
+      "coordinates": [
+        -58.448522656883,
+        -34.595108320227375
+      ]
+    }
+  ]
+}

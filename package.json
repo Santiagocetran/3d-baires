@@ -13,6 +13,7 @@
     "test:browser": "node scripts/browser-smoke.mjs",
     "test": "tsx --test tests/*.test.ts",
     "test:browser:city": "node scripts/browser-city.mjs",
+    "test:browser:design": "node scripts/browser-design.mjs",
     "test:browser:negative": "node scripts/browser-negative.mjs",
     "prepare:vercel": ".venv/bin/python scripts/prepare-vercel.py"
   },

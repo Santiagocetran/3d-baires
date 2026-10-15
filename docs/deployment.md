@@ -23,3 +23,9 @@ Estado al 2026-10-15: artefacto preparado con 624 archivos y 82.689.903 bytes. B
 Verificación remota aprobada (`browser-vercel.json`): 601 bloques, 1.386.616 volúmenes, 13 paquetes, navegación por cuatro barrios sin descargas adicionales y encuadre completo de CABA. Ready en 24.114 ms en esta ejecución con Chromium/SwiftShader; no es una medición de FPS ni una garantía de tiempo en otros dispositivos. La prueba sustituye las teselas OSM por una imagen neutra: verifica aplicación y datos remotos, no el servicio externo del mapa base.
 
 HTTP sin autenticación: raíz y manifiesto 200, paquete inexistente 404. Raíz/datos usan `public, max-age=0, must-revalidate`. SHA-256 del manifiesto remoto igual al local (`aab33af55185c38f912442111a88b2ee24b479ca7cc74e9c2a3fef7fb5ffa31b`); primer paquete y primer archivo de atributos idénticos a los locales y gzip válido.
+
+## Preparación de la actualización visual y estadios · 2026-10-15
+
+`npm run prepare:vercel` aprobó la validación de datos y el build para la actualización del atlas: 13 lugares (ocho estadios), filtro de fútbol, paleta renovada, máscara exterior de CABA y animación optimizada. El artefacto contiene **641 archivos / 85.712.633 bytes**, con los mismos 1.386.616 volúmenes, 601 bloques y 13 paquetes. Se verificó que las 13 fotografías y los tres manifiestos de procedencia coinciden byte a byte con sus fuentes locales. El presupuesto sigue siendo 100.000.000 bytes. Los manifiestos nuevos `data/landmarks-sources.json` y `data/stadium-points.json` se incluyen en la publicación; los datos crudos permanecen excluidos.
+
+La prueba sobre el artefacto estático servido localmente aprobó las 13 fichas, los ocho estadios y sus coordenadas, filtro, fotos, móvil y replay (`docs/browser-design-production-local.json`). Usa fixture para geometría y SwiftShader; no mide hardware ni sustituye la verificación de la ciudad completa en producción.

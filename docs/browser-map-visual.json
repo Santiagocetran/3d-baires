@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T15:49:32.132Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "OSM real, sin sustitución; fixture de geometría de 800 volúmenes fuera de este encuadre",
+  "real_basemap_responses": 30,
+  "real_basemap_verified": true,
+  "screenshot": "data/processed/browser-check/parques-osm-real.png",
+  "errors": [],
+  "request_failures": [],
+  "optional_basemap_failures": [],
+  "geometry_requests": [
+    "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+    "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+  ],
+  "finished_at": "2026-10-15T15:49:41.205Z"
+}

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started_at": "2026-10-15T13:39:11.450Z",
+  "started_at": "2026-10-15T15:34:22.878Z",
   "base_url": "http://127.0.0.1:5173",
   "software_webgl": true,
   "hardware_fps_measured": false,
@@ -11,32 +11,32 @@
       "phase": "error",
       "loadedBlocks": 1,
       "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: HTTP 503",
-      "renders_before_navigation": 42,
-      "renders_after_navigation": 56
+      "renders_before_navigation": 11,
+      "renders_after_navigation": 14
     },
     {
       "kind": "html",
       "phase": "error",
       "loadedBlocks": 1,
       "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: tamaño de contenido inválido",
-      "renders_before_navigation": 48,
-      "renders_after_navigation": 50
+      "renders_before_navigation": 8,
+      "renders_after_navigation": 11
     },
     {
       "kind": "corrupt",
       "phase": "error",
       "loadedBlocks": 1,
       "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: tamaño de contenido inválido",
-      "renders_before_navigation": 44,
-      "renders_after_navigation": 46
+      "renders_before_navigation": 8,
+      "renders_after_navigation": 11
     },
     {
       "kind": "abort",
       "phase": "error",
       "loadedBlocks": 1,
       "error": "No se pudo cargar /data/city/pack1.bin.gz: Failed to fetch",
-      "renders_before_navigation": 39,
-      "renders_after_navigation": 43
+      "renders_before_navigation": 9,
+      "renders_after_navigation": 11
     },
     {
       "kind": "worker-error",
@@ -69,5 +69,5 @@
       "http://127.0.0.1:5173/data/city/pack1.bin.gz"
     ]
   },
-  "finished_at": "2026-10-15T13:39:43.559Z"
+  "finished_at": "2026-10-15T15:34:53.328Z"
 }

@@ -46,3 +46,14 @@ test('worker texture identity must match source IDs and expected block',()=>{
  assert.throws(()=>validateMeshIdentity(m,1,42,[0,-1200]));
  m.attr[1]=41;assert.throws(()=>validateMeshIdentity(m,1,42,[600,-1200]),/Identidad/);
 });
+
+test('worker bounds contain every vertex including unknown flat roofs',()=>{
+ for(const h of [12,NaN,350]){
+  const m=buildMesh(fixture(h));
+  for(let i=0;i<m.pos.length;i+=3){
+   assert.ok(Math.hypot(...m.bounds.center.map((c,j)=>m.pos[i+j]-c))<=m.bounds.radius+1e-6);
+  }
+  const bad={...m,bounds:{center:[0,NaN,0] as [number,number,number],radius:1}};
+  assert.throws(()=>validateMeshIdentity(bad,1,42,[600,-1200]),/Límites/);
+ }
+});
