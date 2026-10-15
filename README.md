@@ -27,13 +27,7 @@ npm run dev
 
 Con los datos actuales ya preparados basta `npm run dev`. Para regenerar únicamente la ciudad residente desde NDJSON auditado, ejecutar `scripts/meshpack.py`. Si la preparación se interrumpe, `.venv/bin/python scripts/meshpack.py --resume` verifica entrada, configuración/versiones, grupos NDJSON, binarios y estadísticas antes de reutilizar bloques. Checkpoints antiguos no se aceptan: repetir sin `--resume`. La publicación valida staging y conserva una copia recuperable hasta completar la promoción; una interrupción entre renombres se recupera al iniciar nuevamente el script. No se necesita Tippecanoe para esta entrega. Los scripts MVT y el recorte original siguen como antecedentes/regresión.
 
-Abrir **http://127.0.0.1:5173**. Desde el equipo conectado por SSH:
-
-```sh
-ssh -N -L 5173:127.0.0.1:5173 usuario@dispositivo
-```
-
-Abrir **http://localhost:5173** en ese equipo. No se expone el servidor a internet.
+[3d-baires.vercel.app](https://3d-baires.vercel.app)
 
 Arrastrar mueve; rueda o +/− acercan; botón derecho y arrastre giran/inclinan. El selector salta a cualquier barrio; «Ver toda CABA» encuadra los límites oficiales. La URL conserva cámara y capa; «Copiar enlace de esta vista» permite compartirlas. En móvil el panel se puede contraer. El indicador muestra preparación global de la ciudad, no nuevas descargas por viewport. Los bloques cargados permanecen y sólo se omite su dibujo cuando están fuera de cámara. «Animar volúmenes» repite la llegada visual; no representa historia constructiva. Se respeta movimiento reducido.
 
