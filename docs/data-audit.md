@@ -220,3 +220,5 @@ Fuentes: 1,576,456,584 bytes. Tejido solo: 1,087,959,837 bytes. Recorte de San T
 Los bloqueos iniciales de DNS y escritura de Git se resolvieron al habilitar acceso en la sesión. Hubo resets intermitentes del catálogo; los cuatro recursos terminaron descargados y con checksum.
 
 Las pruebas ejecutadas y el estado de inspección visual se detallan en `validation.md`. No se afirma que los chequeos geométricos sustituyan una inspección visual ni una medición de rendimiento real.
+
+Publicación del 2026-10-15: el mismo conjunto auditado está disponible en [3d-baires.vercel.app](https://3d-baires.vercel.app). La prueba remota cargó los 601 bloques, 13 paquetes y 1.386.616 volúmenes sin descargas adicionales de geometría al navegar. No cambia la fecha de observación ni demuestra completitud. Evidencia y límites de verificación en [deployment.md](deployment.md) y `browser-vercel.json`.

@@ -1,5 +1,7 @@
 # 3d-baires
 
+**Versión pública:** [3d-baires.vercel.app](https://3d-baires.vercel.app).
+
 Mapa 3D local de **Capital Federal (48 barrios)** con geometría y alturas reales publicadas por GCBA. La ciudad se carga progresivamente una vez y sus mallas permanecen en memoria al navegar, sin desaparecer al cambiar de zoom.
 
 El motor de edificios adapta la arquitectura de [Amsterdam, building by building](https://github.com/alexbarakov/amsterdam-by-building): paquetes binarios, workers, mallas Three.js persistentes, animación en GPU y selección por identificador. React conserva la interfaz y MapLibre la cámara y el mapa base. Licencia MIT y atribución conservadas en `licenses/`. Ver `docs/amsterdam-architecture.md`.
