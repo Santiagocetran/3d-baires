@@ -8,6 +8,8 @@ Un mapa interactivo para recorrer **Buenos Aires en 3D**, explorar sus 48 barrio
 
 El proyecto se inspira en [Amsterdam, building by building](https://github.com/alexbarakov/amsterdam-by-building), de alexbarakov: una manera de conocer una ciudad recorriendo su arquitectura en un mapa tridimensional. 3d-baires lleva esa idea a Buenos Aires y adapta parte de su motor 3D, conservando su atribución y licencia MIT.
 
+También toma inspiración de [SimCABA](https://caba.nicolaspoore.com/), de Nicolás Poore, y su forma de invitar a explorar y reconocer Buenos Aires a través de un mapa ilustrado de sus barrios y lugares emblemáticos.
+
 ## Cómo se hizo
 
 Se utilizaron datos abiertos del Gobierno de la Ciudad de Buenos Aires para representar las formas y alturas publicadas de los volúmenes urbanos. Python prepara los datos; Three.js dibuja la ciudad en 3D y MapLibre permite recorrerla sobre un mapa de OpenStreetMap. La interfaz está hecha con React y TypeScript, y el sitio está publicado en Vercel.
