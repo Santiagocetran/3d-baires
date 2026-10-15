@@ -26,6 +26,10 @@ La geometría procede de Tejido Urbano de GCBA, con datos hasta 2021, por lo que
 
 Las fichas de lugares usan fuentes de Turismo BA y del catálogo oficial de estadios. Las fotografías provienen de Wikimedia Commons y muestran sus créditos y licencias en cada ficha.
 
+## ¿Querés sumar algo?
+
+Las ideas, fotos, datos, pruebas, diseños, textos y aportes de código son bienvenidos. No necesitás saber programar: mirá [cómo contribuir](CONTRIBUTING.md) o contanos tu propuesta en los [issues](https://github.com/Santiagocetran/3d-baires/issues).
+
 ## Créditos y documentación
 
 Código bajo [licencia MIT](LICENSE), con [atribución al proyecto de Amsterdam](licenses/amsterdam-by-building-MIT.txt). Los datos de GCBA, la cartografía de OpenStreetMap y las fotografías conservan sus propias licencias.

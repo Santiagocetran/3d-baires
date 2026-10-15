@@ -270,3 +270,7 @@ Código `1824fa8` enviado a `origin/master` y publicado en [3d-baires.vercel.app
 La prueba de ciudad completa se **volvió a ejecutar sobre esta producción** y aprobó los conjuntos exactos de 601 bloques/13 paquetes, 1.386.616 volúmenes y navegación sin nuevas descargas de geometría (`docs/browser-vercel.json`). Esta evidencia sustituye para la publicación actual el carácter de antecedente de la prueba anterior; continúa sin ser una medición de memoria GPU, FPS físico o completitud del inventario.
 
 La revisión remota de fichas aprobó en `docs/browser-design-vercel.json`: 13 lugares, ocho estadios, fotos y clubes correctos, coordenadas oficiales, filtro y uso móvil/teclado. Usa fixture para geometría y assets reales de producción; la ciudad completa se comprueba por separado en el informe anterior.
+
+## Revisión para compartir y colaborar · 2026-10-15
+
+Se revisaron historial Git, exclusión de credenciales, artefacto público y dependencias conocidas antes de compartir el proyecto. El alcance y los resultados se conservan en [security-review.md](security-review.md) y [security-review.json](security-review.json). Se agregaron [CONTRIBUTING.md](../CONTRIBUTING.md), con participación abierta también sin código, y [SECURITY.md](../SECURITY.md), con un canal privado de reportes. Esta revisión no modifica geometrías, alturas, fechas ni procedencia de los datos.

@@ -1,0 +1,126 @@
+{
+  "reviewed_at": "2026-10-15T16:49:45.642603+00:00",
+  "baseline_commit": "a2f495ca8f263cbdac8bb39c90025c25d8a3611d",
+  "scope": "Historial alcanzable de Git, archivos candidatos a publicar, build estático, dependencias fijadas y controles básicos de GitHub/producción; no auditoría exhaustiva.",
+  "history": {
+    "shallow": false,
+    "commits_scanned": 11,
+    "gitleaks_version": "8.30.1",
+    "release_archive_checksum_verified": true,
+    "findings": 0,
+    "redacted": true,
+    "sensitive_paths": [],
+    "unique_paths_reviewed": 120
+  },
+  "prepared_public_build": {
+    "path": ".vercel/output/static",
+    "gitleaks_findings": 0,
+    "scanner_excludes_unreadable_binary_content": true
+  },
+  "npm_audit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependency_counts": {
+      "prod": 31,
+      "dev": 111,
+      "optional": 79,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 141
+    }
+  },
+  "python_audit": {
+    "tool": "pip-audit",
+    "mode": "--no-deps --disable-pip -r requirements.txt",
+    "dependencies": [
+      {
+        "name": "shapely",
+        "version": "2.1.2",
+        "vulnerabilities": 0
+      },
+      {
+        "name": "pyproj",
+        "version": "3.7.2",
+        "vulnerabilities": 0
+      },
+      {
+        "name": "ijson",
+        "version": "3.4.0.post0",
+        "vulnerabilities": 0
+      },
+      {
+        "name": "numpy",
+        "version": "2.5.4",
+        "vulnerabilities": 0
+      },
+      {
+        "name": "certifi",
+        "version": "2026.7.22",
+        "vulnerabilities": 0
+      }
+    ],
+    "installed_versions_match_pins": true
+  },
+  "github": {
+    "default_branch": "master",
+    "has_issues": true,
+    "push_protection": "enabled",
+    "secret_scanning": "enabled",
+    "visibility": "public",
+    "private_vulnerability_reporting": true,
+    "open_secret_alerts_at_check": 0
+  },
+  "production_sensitive_paths": [
+    {
+      "path": "/.env",
+      "http_status": 404
+    },
+    {
+      "path": "/.env.local",
+      "http_status": 404
+    },
+    {
+      "path": "/.git/config",
+      "http_status": 404
+    },
+    {
+      "path": "/.aws/credentials",
+      "http_status": 403
+    },
+    {
+      "path": "/.vercel/project.json",
+      "http_status": 404
+    }
+  ],
+  "limitations": [
+    "Búsqueda por reglas, revisión dirigida y auditorías de avisos conocidos a la fecha; no garantizan ausencia de fallos o secretos con formatos desconocidos.",
+    "No se verificaron permisos de cuenta Vercel/GitHub, infraestructura completa ni datos privados fuera de la publicación.",
+    "No se probaron credenciales ni se contactó a sus posibles emisores para validarlas.",
+    "Sin cambios de código de aplicación ni nuevo despliegue en esta revisión."
+  ],
+  "publication_candidate": {
+    "files": 113,
+    "gitleaks_findings": 0,
+    "includes_new_contribution_and_security_docs": true,
+    "ignored_local_files_excluded": true
+  },
+  "fresh_build": {
+    "path": "dist",
+    "gitleaks_findings": 0
+  },
+  "local_checks": {
+    "typescript": "passed",
+    "build": "passed",
+    "markdown_links": "passed",
+    "git_diff_check": "passed",
+    "unit_and_browser_tests": "No se repitieron: sólo documentación y reglas de exclusión; sin cambios de aplicación."
+  },
+  "completed_at": "2026-10-15T16:51:22.034017+00:00",
+  "status": "passed"
+}

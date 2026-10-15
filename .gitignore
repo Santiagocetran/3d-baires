@@ -15,3 +15,17 @@ public/data/*
 .tools/
 
 .vercel/
+
+# Credenciales y claves locales: mantener fuera de Git.
+.ssh/
+.azure/
+.gcloud/
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+id_rsa
+id_ed25519
+/credentials.json
+/service-account*.json
