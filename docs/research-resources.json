@@ -1,0 +1,191 @@
+{
+  "relevamiento-usos-suelo": {
+    "url": "https://data.buenosaires.gob.ar/dataset/relevamiento-usos-suelo",
+    "license": "CC-BY-2.5-AR",
+    "notes": "Información de tipología edilicia y usos de todas las parcelas de la urbe.",
+    "resources": [
+      {
+        "name": "Documentación Relevamiento Usos Suelo 2008",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/documentacion-relevamiento-usos-suelo-2008.pdf",
+        "id": "juqdkmgo-1801-resource",
+        "license": null
+      },
+      {
+        "name": "Documentación Relevamiento Usos Suelo 2011",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/documentacion-relevamiento-usos-suelo-2011.pdf",
+        "id": "juqdkmgo-1802-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento de Usos del Suelo (html)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-de-usos-del-suelo-html.txt",
+        "id": "juqdkmgo-1803-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2008",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2008.csv",
+        "id": "juqdkmgo-1804-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2011",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2011.csv",
+        "id": "juqdkmgo-1805-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2011 (SHP)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2011-zip.zip",
+        "id": "juqdkmgo-1806-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2017",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2017.csv",
+        "id": "juqdkmgo-1807-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2017 (SHP)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2017-zip.zip",
+        "id": "juqdkmgo-1808-resource",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2017 (GeoJSON)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-suelo-2017.geojson",
+        "id": "6bf6b0b1-53c4-4860-ab78-3f5fb4b398a2",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2008 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2008.xlsx",
+        "id": "juqdkmgo-1804-resource-xlsx",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2011 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2011.xlsx",
+        "id": "juqdkmgo-1805-resource-xlsx",
+        "license": null
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2017 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2017.xlsx",
+        "id": "juqdkmgo-1807-resource-xlsx",
+        "license": null
+      },
+      {
+        "name": "Documentación Relevamiento Usos Suelo 2022-2024 (PDF)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/documentacion-relevamiento-usos-suelo-2022-2024.pdf",
+        "id": "801aecc9-d361-4f83-8f61-08c9b76f987d",
+        "license": "cc-by"
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2022-2024 (SHP)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2022-2024-zip.zip",
+        "id": "613ef164-131b-422a-b9e2-257cee4b46b4",
+        "license": "cc-by"
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2022-2024 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2022-2024.xlsx",
+        "id": "dca28a61-18a1-492a-81f1-b0e39d0e48a8",
+        "license": "cc-by"
+      },
+      {
+        "name": "Relevamiento Usos del Suelo 2022-2024 (CSV)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/relevamiento-usos-suelo/relevamiento-usos-del-suelo-2022-2024.csv",
+        "id": "3c7e5f10-577a-44ea-b614-82cc05f842aa",
+        "license": "cc-by"
+      }
+    ]
+  },
+  "areas-proteccion-historica": {
+    "url": "https://data.buenosaires.gob.ar/dataset/areas-proteccion-historica",
+    "license": "CC-BY-2.5-AR",
+    "notes": "Información sobre las zonas de la Ciudad consultadas para ser consideradas áreas con valor patrimonial que poseen gran calidad urbana y arquitectónica. Para más información ver el Atlas de Edificios Catalogados.",
+    "resources": [
+      {
+        "name": "Áreas de Protección Histórica",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/areas-de-proteccion-historica.csv",
+        "id": "juqdkmgo-91-resource",
+        "license": "CC-BY-4.0"
+      },
+      {
+        "name": "Áreas de Protección Histórica (SHP)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/areas-de-proteccion-historica-rar.zip",
+        "id": "juqdkmgo-92-resource",
+        "license": "CC-BY-4.0"
+      },
+      {
+        "name": "Registro Acumulado de Áreas de Protección Histórica 2017",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/registro-acumulado-de-areas-de-proteccion-historica-2017.csv",
+        "id": "juqdkmgo-93-resource",
+        "license": null
+      },
+      {
+        "name": "Registro Acumulado de Áreas de Protección Histórica 2018",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/registro-acumulado-de-areas-de-proteccion-historica-2018.csv",
+        "id": "juqdkmgo-94-resource",
+        "license": null
+      },
+      {
+        "name": "Áreas de Protección Histórica (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/areas-de-proteccion-historica.xlsx",
+        "id": "juqdkmgo-91-resource-xlsx",
+        "license": "CC-BY-4.0"
+      },
+      {
+        "name": "Registro Acumulado de Áreas de Protección Histórica 2017 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/registro-acumulado-de-areas-de-proteccion-historica-2017.xlsx",
+        "id": "juqdkmgo-93-resource-xlsx",
+        "license": null
+      },
+      {
+        "name": "Registro Acumulado de Áreas de Protección Histórica 2018 (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/registro-acumulado-de-areas-de-proteccion-historica-2018.xlsx",
+        "id": "juqdkmgo-94-resource-xlsx",
+        "license": null
+      },
+      {
+        "name": "Áreas de Protección Histórica (GeoJSON)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/areas-proteccion-historica/areas-proteccion-historica.geojson",
+        "id": "d8e1a617-f2e3-4b69-a824-2ae254a20430",
+        "license": "CC-BY-4.0"
+      }
+    ]
+  },
+  "obras-registradas": {
+    "url": "https://data.buenosaires.gob.ar/dataset/obras-registradas",
+    "license": "CC-BY-2.5-AR",
+    "notes": "Obras civiles, públicas y privadas, nuevas o de remodelación registradas ante la Dirección General de Registro de Obras y Catastro.",
+    "resources": [
+      {
+        "name": "Obras Registradas",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/subsecretaria-de-planeamiento/obras-registradas/obrasregistradas-acumulado.csv",
+        "id": "ee7f1761-49b5-47de-9388-d1c06a95834f",
+        "license": "CC-BY-2.5-AR"
+      },
+      {
+        "name": "Obras Registradas (XLSX)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/subsecretaria-de-planeamiento/obras-registradas/obrasregistradas-acumulado.xlsx",
+        "id": "5cec1eee-8daf-4c03-a1c5-69faf551a6f3",
+        "license": "CC-BY-2.5-AR"
+      },
+      {
+        "name": "Obras Registradas (SHP)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/subsecretaria-de-planeamiento/obras-registradas/obrasregistradas-acumulado.zip",
+        "id": "2269188c-4c6c-4e57-8c06-6ca1617d30e9",
+        "license": "CC-BY-2.5-AR"
+      },
+      {
+        "name": "Obras Registradas (GeoJSON)",
+        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/subsecretaria-de-planeamiento/obras-registradas/obrasregistradas-acumulado.geojson",
+        "id": "1f61d764-c2c5-4a78-b1cb-0bc5669faab3",
+        "license": "CC-BY-2.5-AR"
+      }
+    ]
+  }
+}

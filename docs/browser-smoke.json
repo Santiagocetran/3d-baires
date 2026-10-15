@@ -1,0 +1,10 @@
+{
+  "fixture": "800 real central-CABA source volumes",
+  "shader_errors": [],
+  "geometry_pack_requests": 2,
+  "geometry_requests_after_navigation": 2,
+  "gpu_picking": true,
+  "mobile_resize": true,
+  "reduced_motion": true,
+  "selectedText": "×\nVOLUMEN · 19379\n8.4 m\nValor original\n8.4\nEstado de altura\nPositiva y dentro del rango de revisión\nTipo\nEdificio\nParcela (SMP)\n02-001-019\nDirecciones de parcela\nTACUARI 766 · TACUARI 770 · TACUARI 776\nObservación de direcciones\nDesconocida; catastro descargado en 2026\nCoincidencia\nVarios accesos de parcela\nBarrio\nMonserrat\nOrigen\nFotogrametría\nFuente del registro\nSec Planeamiento\nObservación\nHasta 2021 (catálogo); fecha individual desconocida\nConstrucción\nDesconocido\n\nUna parcela puede contener varios volúmenes y accesos. Las direcciones no identifican necesariamente este volumen.\n\nTejido Urbano · GCBA ↗"
+}

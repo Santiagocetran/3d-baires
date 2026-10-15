@@ -1,0 +1,9 @@
+{
+  "zoom": 15,
+  "unique_source_rows": 1382714,
+  "source_records": 1386616,
+  "records_not_represented_at_z15": 3902,
+  "fragments": 1516798,
+  "empty_tiles": 185,
+  "sampled_source_property_and_coordinate_matches": 234
+}

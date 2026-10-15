@@ -1,0 +1,232 @@
+[
+  {
+    "id": "barolo",
+    "title": "Palacio Barolo",
+    "address": "AV. DE MAYO 1370",
+    "street": "AV. DE MAYO",
+    "number": 1370,
+    "summary": "Mario Palanti diseñó este edificio para Luigi Barolo con referencias a la Divina Comedia. Su faro es uno de los rasgos más reconocibles de la Avenida de Mayo.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/palacio-barolo",
+    "dates": [
+      {
+        "year": 1923,
+        "type": "inauguración",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/palacio-barolo"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "mercado",
+    "title": "Mercado de San Telmo",
+    "address": "CARLOS CALVO 495",
+    "street": "CARLOS CALVO",
+    "number": 495,
+    "summary": "El mercado abrió para abastecer a un barrio que recibía inmigrantes europeos. El proyecto de Juan Antonio Buschiazzo conserva una estructura de metal y una cubierta con vidrio.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/mercado-san-telmo",
+    "dates": [
+      {
+        "year": 1897,
+        "type": "inauguración",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/mercado-san-telmo"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending",
+    "address_source": "https://turismo.buenosaires.gob.ar/sites/turismo/files/ArteModa_BuenosAires.pdf"
+  },
+  {
+    "id": "vera",
+    "title": "Palacio Vera",
+    "address": "AV. DE MAYO 767",
+    "street": "AV. DE MAYO",
+    "number": 767,
+    "summary": "Arturo Prins y Oscar Ranzenhoffer proyectaron esta residencia para la familia Díaz Vélez. Sus puertas combinan curvas y motivos vegetales propios del art nouveau.",
+    "source": "https://turismo.buenosaires.gob.ar/es/atractivo/palacio-vera",
+    "dates": [
+      {
+        "year": 1910,
+        "type": "construcción",
+        "source": "https://turismo.buenosaires.gob.ar/es/atractivo/palacio-vera"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": 1910,
+    "location_method": "pending"
+  },
+  {
+    "id": "cultura",
+    "title": "Casa de la Cultura",
+    "address": "AV. DE MAYO 575",
+    "street": "AV. DE MAYO",
+    "number": 575,
+    "summary": "La antigua sede de La Prensa reunía salas de trabajo y comunicación por tubos neumáticos. Carlos Agote y Alberto Gainza diseñaron el edificio, organizado alrededor de un patio central.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-de-la-cultura-de-la-ciudad",
+    "dates": [
+      {
+        "year": 1898,
+        "type": "construcción",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-de-la-cultura-de-la-ciudad"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": 1898,
+    "location_method": "pending"
+  },
+  {
+    "id": "ignacio",
+    "title": "San Ignacio de Loyola",
+    "address": "BOLIVAR 225",
+    "street": "BOLIVAR",
+    "number": 225,
+    "summary": "Esta iglesia integra la Manzana de las Luces. El templo jesuita conserva un altar mayor tallado en madera y una configuración singular de naves laterales de doble altura.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/iglesia-de-san-ignacio-de-loyola",
+    "dates": [
+      {
+        "year": 1722,
+        "type": "construcción (intervalo)",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/iglesia-de-san-ignacio-de-loyola",
+        "year_start": 1686
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "inmobiliaria",
+    "title": "La Inmobiliaria",
+    "address": "AV. DE MAYO 1402",
+    "street": "AV. DE MAYO",
+    "number": 1402,
+    "summary": "Luis Broggi proyectó este conjunto para una compañía de seguros. Las cúpulas rojas y las esculturas de Venus y Apolo forman parte de su perfil sobre la avenida.",
+    "source": "https://turismo.buenosaires.gob.ar/es/atractivo/edificio-la-inmobiliaria",
+    "dates": [
+      {
+        "year": 1910,
+        "type": "fecha del edificio (fuente sin distinguir etapa)",
+        "source": "https://turismo.buenosaires.gob.ar/es/atractivo/edificio-la-inmobiliaria"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "critica",
+    "title": "Ex diario Crítica",
+    "address": "AV. DE MAYO 1333",
+    "street": "AV. DE MAYO",
+    "number": 1333,
+    "summary": "La sede art decó proyectada por Andrés Kalnay alojó al diario fundado por Natalio Botana. Entre sus colaboradores estuvieron Jorge Luis Borges y Roberto Arlt.",
+    "source": "https://turismo.buenosaires.gob.ar/es/atractivo/edificio-ex-diario-cr%C3%ADtica",
+    "dates": [
+      {
+        "year": 1926,
+        "type": "inauguración",
+        "source": "https://turismo.buenosaires.gob.ar/es/atractivo/edificio-ex-diario-cr%C3%ADtica"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "dinamarquesa",
+    "title": "Iglesia Dinamarquesa",
+    "address": "CARLOS CALVO 257",
+    "street": "CARLOS CALVO",
+    "number": 257,
+    "summary": "La comunidad danesa financió este templo con apoyo de la Iglesia Danesa en el Exterior. El proyecto de Rönnow y Bisgaard se reconoce por su torre y sus techos neogóticos.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/iglesia-dinamarquesa",
+    "dates": [
+      {
+        "year": 1931,
+        "type": "inauguración",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/iglesia-dinamarquesa"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "defensa",
+    "title": "Pasaje Defensa",
+    "address": "DEFENSA 1179",
+    "street": "DEFENSA",
+    "number": 1179,
+    "summary": "Esta casa de la familia Ezeiza, construida en la década de 1880, organiza sus habitaciones alrededor de galerías y patios. Más tarde fue adaptada como galería comercial.",
+    "source": "https://turismo.buenosaires.gob.ar/es/atractivo/pasaje-defensa",
+    "dates": [
+      {
+        "year": 1981,
+        "type": "conversión en galería comercial",
+        "source": "https://turismo.buenosaires.gob.ar/es/atractivo/pasaje-defensa"
+      },
+      {
+        "year_start": 1880,
+        "year": 1889,
+        "type": "construcción (década, sin año preciso)",
+        "source": "https://turismo.buenosaires.gob.ar/es/atractivo/pasaje-defensa"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "minima",
+    "title": "Casa Mínima",
+    "address": "SAN LORENZO 380",
+    "street": "SAN LORENZO",
+    "number": 380,
+    "summary": "Este estrecho frente es un remanente de una vivienda del siglo XIX y de las transformaciones de su manzana. La asociación con un esclavo liberto aparece en la fuente como un mito, no como una identidad comprobada.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-m%C3%ADnima",
+    "dates": [],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "rosada",
+    "title": "Casa Rosada",
+    "address": "BALCARCE 50",
+    "street": "BALCARCE",
+    "number": 50,
+    "summary": "El edificio actual reúne la antigua sede presidencial y el Palacio de Correos. Francisco Tamburini proyectó el arco central que articula ambas construcciones frente a Plaza de Mayo.",
+    "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-de-gobierno-casa-rosada",
+    "dates": [
+      {
+        "year": 1882,
+        "type": "solicitud de proyecto de ensanche y unión",
+        "source": "https://turismo.buenosaires.gob.ar/es/otros-establecimientos/casa-de-gobierno-casa-rosada"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  },
+  {
+    "id": "nordica",
+    "title": "Iglesia Nórdica",
+    "address": "AZOPARDO 1428",
+    "street": "AZOPARDO",
+    "number": 1428,
+    "summary": "Este templo luterano nació para asistir a los marineros suecos que llegaban a Buenos Aires. Antes de disponer del edificio, la congregación celebraba sus oficios en una capilla prestada.",
+    "source": "https://turismo.buenosaires.gob.ar/es/circuitos-buenos-aires-sur/san-telmo-gastronomico-religioso",
+    "dates": [
+      {
+        "year": 1945,
+        "type": "inauguración",
+        "source": "https://turismo.buenosaires.gob.ar/es/circuitos-buenos-aires-sur/san-telmo-gastronomico-religioso"
+      }
+    ],
+    "reviewed_at": "2026-10-14",
+    "construction_year": null,
+    "location_method": "pending"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "name": "3d-baires",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "check": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test:mesh": "tsx --test tests/city-mesh.test.ts",
+    "validate:city": "tsx scripts/validate-resident.ts",
+    "test:browser": "node scripts/browser-smoke.mjs"
+  },
+  "dependencies": {
+    "maplibre-gl": "5.6.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@mapbox/vector-tile": "1.3.1",
+    "@playwright/test": "1.64.1",
+    "@types/geojson": "7946.0.16",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "@types/three": "0.180.0",
+    "pbf": "3.3.0",
+    "tsx": "4.23.15",
+    "typescript": "5.8.3",
+    "vite": "6.3.5"
+  }
+}

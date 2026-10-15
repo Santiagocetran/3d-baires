@@ -1,0 +1,10 @@
+{
+  "records": 1386616,
+  "unique_source_rows": 1386616,
+  "triangles": 24436400,
+  "vertices": 18136158,
+  "typed_mesh_and_texture_bytes": 431099114,
+  "unknown_height_flat": 1,
+  "attribute_samples": 1202,
+  "note": "Buffer storage estimate, not measured browser/GPU memory. Three.js retains CPU arrays and also uploads GPU buffers."
+}

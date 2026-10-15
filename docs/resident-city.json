@@ -1,0 +1,20 @@
+{
+  "records": 1386616,
+  "vertices": 9068079,
+  "input_coordinates": 15710638,
+  "parts": 1386616,
+  "rings": 1390492,
+  "blocks": 601,
+  "packs": 13,
+  "geometry_download_bytes": 60922260,
+  "geometry_uncompressed_bytes": 100316496,
+  "attrs_download_bytes": 18705100,
+  "max_block_bytes": 485940,
+  "max_block_records": 7177,
+  "source_sha256": "b0e9a9be199d573886b7e151a2da9a83f10aa72b7b965b936e1e2cfc58270e3a",
+  "simplification_m": 0.25,
+  "records_excluded": 0,
+  "encoded_topology_failures": 0,
+  "successful_run_seconds": 139.6,
+  "resumed": true
+}

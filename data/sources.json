@@ -1,0 +1,175 @@
+{
+  "project": "3d-baires",
+  "reviewed_at": "2026-10-14",
+  "attribution": "Gobierno de la Ciudad Autónoma de Buenos Aires (GCBA)",
+  "download_manifest": "data/downloads.json",
+  "sources": {
+    "tejido": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/tejido-urbano",
+      "resource_id": "9d950b8c-d8cd-4dde-9987-9565313974c8",
+      "observation_date": "hasta 2021; fecha individual desconocida",
+      "attempted_at": "2026-10-14T17:56:47.957186+00:00",
+      "path": "data/raw/tejido.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/tejido-urbano/tejido.geojson",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-01T14:02:07.415831",
+      "resource_modified": "2021-05-10T00:00:00",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:58:16.366798+00:00",
+      "bytes": 1087959837,
+      "sha256": "916ece71a46ff37b3f77e9566794f69cafb6e7e78444fa8982dec3459ad5b766"
+    },
+    "parcelas": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/parcelas",
+      "resource_id": "8d8ffe66-9eb9-4f12-8f23-e1586a2d888d",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:59:13.713585+00:00",
+      "path": "data/raw/parcelas.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/parcelas/parcelas_catastrales.geojson",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-07T13:21:08.714038",
+      "resource_modified": "2019-10-07T16:10:08.757814",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:59:46.200955+00:00",
+      "bytes": 438398946,
+      "sha256": "ed572c6b5bd6bf689ed602f14f4ed774259d096e79b76990cc32351e0020d3a7"
+    },
+    "frentes": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/parcelas",
+      "resource_id": "juqdkmgo-1563-resource",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:59:47.525444+00:00",
+      "path": "data/raw/frentes.csv",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/parcelas/frentes-parcelas.csv",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-07T13:21:08.714038",
+      "resource_modified": "2019-10-07T16:04:08.749611",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:59:51.791634+00:00",
+      "bytes": 49334131,
+      "sha256": "0b52f38c6d9e793981ea1e50d69c4fac63574ae06416cc50e82e1530643f11df"
+    },
+    "barrios": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/barrios",
+      "resource_id": "1c3d185b-fdc9-474b-b41b-9bd960a3806e",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:58:20.408820+00:00",
+      "path": "data/raw/barrios.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/innovacion-transformacion-digital/barrios/barrios.geojson",
+      "license": "cc-by",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-29T17:10:54.619370",
+      "resource_modified": "2019-07-25T13:00:13.860746",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:58:20.625259+00:00",
+      "bytes": 763670,
+      "sha256": "c24fabd01c61b889388f0a8cfd9ca4757c1f57583c0ffd1b4ed3b96d768bb655"
+    }
+  },
+  "historical_sources": "data/stories.json",
+  "historical_text_policy": "Original summaries of sourced facts; no images or full source texts redistributed",
+  "basemap": {
+    "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attribution": "© OpenStreetMap contributors",
+    "license": "ODbL-1.0 (data); tile service policy applies",
+    "terms": "https://operations.osmfoundation.org/policies/tiles/",
+    "external_network": true,
+    "bulk_download": false
+  },
+  "license_discrepancy": "Tejido/Parcelas/Frentes resource metadata says CC-BY-4.0; dataset metadata says CC-BY-2.5-AR. Both retained; no exclusive licence conclusion. Barrios resource says cc-by without version; dataset says CC-BY-2.5-AR.",
+  "transformations": [
+    "WGS84 longitude/latitude output; source CRS and always_xy recorded",
+    "Conservative numeric height parsing; no conversion from floors",
+    "Invalid geometry excluded, not repaired",
+    "Neighbourhood assignment uses point-on-surface; not a completeness estimate",
+    "No historical year propagated from parcel to building volumes",
+    "Browser coordinates rounded to seven decimal places; full precision kept in processed NDJSON. Invalid rounded polygons revert to originals. Shared observation metadata avoids repetition.",
+    "Active citywide delivery uses Tippecanoe MVT quantization and tile clipping at zooms 14–15, without density dropping. Subpixel polygons can collapse; source NDJSON remains unchanged.",
+    "Active delivery: EPSG:3857 to local metric frame, topology-preserving 0.25 m simplification, validated Float32 local coordinates, all volumes retained without block clipping; workers triangulate and extrude accepted heights. Unknown/questionable heights use flat geometry; original attributes retained."
+  ],
+  "software": [
+    {
+      "name": "maplibre-gl",
+      "version": "5.6.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "react",
+      "version": "19.1.0",
+      "license": "MIT"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.1.0",
+      "license": "MIT"
+    },
+    {
+      "name": "vite",
+      "version": "6.3.5",
+      "license": "MIT"
+    },
+    {
+      "name": "typescript",
+      "version": "5.8.3",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "tippecanoe",
+      "version": "2.79.0",
+      "commit": "68ab8dcc229f95b8b25877697d5e8d66783af503",
+      "license": "BSD-2-Clause",
+      "url": "https://github.com/felt/tippecanoe/tree/2.79.0"
+    },
+    {
+      "name": "three",
+      "version": "0.180.0",
+      "license": "MIT",
+      "url": "https://github.com/mrdoob/three.js"
+    },
+    {
+      "name": "amsterdam-by-building adapted worker, packing and shaders",
+      "commit": "d5eb5a89fabd1cc04473bddbc721b1e5f2b42bcb",
+      "license": "MIT",
+      "copyright": "2026 alexbarakov",
+      "url": "https://github.com/alexbarakov/amsterdam-by-building",
+      "license_file": "licenses/amsterdam-by-building-MIT.txt"
+    }
+  ],
+  "previous_browser_artifacts": {
+    "volume_count": 29933,
+    "bytes": 21287183,
+    "scope": [
+      "San Telmo",
+      "Monserrat"
+    ],
+    "coordinate_decimal_places": 7
+  },
+  "browser_artifacts": {
+    "scope": "CABA, 48 barrios",
+    "format": "CBA1 gzip binary blocks; persistent Three.js meshes",
+    "metrics": "docs/resident-city.json",
+    "validation": "docs/resident-validation.json",
+    "browser_validation": [
+      "docs/browser-smoke.json",
+      "docs/browser-city.json"
+    ],
+    "geometry_simplification_m": 0.25,
+    "age_data": "unknown for all volumes",
+    "historical_layer": "not displayed"
+  },
+  "previous_mvt_artifacts": {
+    "scope": "CABA, 48 barrios",
+    "format": "MVT, static local files",
+    "metrics": "docs/citywide-tiles.json",
+    "validation": "docs/tile-validation.json",
+    "zoom": [
+      14,
+      15
+    ],
+    "age_data": "unknown for all volumes",
+    "historical_layer": "not displayed"
+  }
+}

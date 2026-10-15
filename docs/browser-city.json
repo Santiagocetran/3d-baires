@@ -1,0 +1,5 @@
+{
+  "status": "invalidated",
+  "date": "2026-10-15",
+  "reason": "El test anterior confundía desaparición del progreso por error con finalización. 967 ms y un paquete no prueban ciudad completa. Pendiente nueva ejecución con estado estructurado."
+}

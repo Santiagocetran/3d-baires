@@ -1,0 +1,403 @@
+{
+  "generated_at": "2026-10-14T18:18:19.496343+00:00",
+  "sources": {
+    "tejido": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/tejido-urbano",
+      "resource_id": "9d950b8c-d8cd-4dde-9987-9565313974c8",
+      "observation_date": "hasta 2021; fecha individual desconocida",
+      "attempted_at": "2026-10-14T17:56:47.957186+00:00",
+      "path": "data/raw/tejido.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/tejido-urbano/tejido.geojson",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-01T14:02:07.415831",
+      "resource_modified": "2021-05-10T00:00:00",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:58:16.366798+00:00",
+      "bytes": 1087959837,
+      "sha256": "916ece71a46ff37b3f77e9566794f69cafb6e7e78444fa8982dec3459ad5b766"
+    },
+    "parcelas": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/parcelas",
+      "resource_id": "8d8ffe66-9eb9-4f12-8f23-e1586a2d888d",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:59:13.713585+00:00",
+      "path": "data/raw/parcelas.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/parcelas/parcelas_catastrales.geojson",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-07T13:21:08.714038",
+      "resource_modified": "2019-10-07T16:10:08.757814",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:59:46.200955+00:00",
+      "bytes": 438398946,
+      "sha256": "ed572c6b5bd6bf689ed602f14f4ed774259d096e79b76990cc32351e0020d3a7"
+    },
+    "frentes": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/parcelas",
+      "resource_id": "juqdkmgo-1563-resource",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:59:47.525444+00:00",
+      "path": "data/raw/frentes.csv",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/secretaria-de-desarrollo-urbano/parcelas/frentes-parcelas.csv",
+      "license": "CC-BY-4.0",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-07T13:21:08.714038",
+      "resource_modified": "2019-10-07T16:04:08.749611",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:59:51.791634+00:00",
+      "bytes": 49334131,
+      "sha256": "0b52f38c6d9e793981ea1e50d69c4fac63574ae06416cc50e82e1530643f11df"
+    },
+    "barrios": {
+      "catalogue_url": "https://data.buenosaires.gob.ar/dataset/barrios",
+      "resource_id": "1c3d185b-fdc9-474b-b41b-9bd960a3806e",
+      "observation_date": null,
+      "attempted_at": "2026-10-14T17:58:20.408820+00:00",
+      "path": "data/raw/barrios.geojson",
+      "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/innovacion-transformacion-digital/barrios/barrios.geojson",
+      "license": "cc-by",
+      "dataset_license": "CC-BY-2.5-AR",
+      "catalogue_modified": "2026-07-29T17:10:54.619370",
+      "resource_modified": "2019-07-25T13:00:13.860746",
+      "status": "downloaded",
+      "retrieved_at": "2026-10-14T17:58:20.625259+00:00",
+      "bytes": 763670,
+      "sha256": "c24fabd01c61b889388f0a8cfd9ca4757c1f57583c0ffd1b4ed3b96d768bb655"
+    }
+  },
+  "counts": {
+    "records": 1386616,
+    "missing_smp": 20659,
+    "empty_geometry": 0,
+    "invalid_geometry": 0,
+    "non_polygon": 0,
+    "missing_id": 0,
+    "neighbourhood_unmatched_or_ambiguous": 0
+  },
+  "geometry_types": {
+    "MultiPolygon": 1386616
+  },
+  "bounds_wgs84": [
+    -58.53041508692756,
+    -34.70014960827453,
+    -58.335709138211556,
+    -34.53181147971989
+  ],
+  "crs": {
+    "barrios": {
+      "declared": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "used": "OGC:CRS84",
+      "output": "EPSG:4326",
+      "axis_order": "longitude,latitude",
+      "absent_crs_policy": "RFC 7946; geographic bounds validated"
+    },
+    "parcelas": {
+      "declared": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "used": "OGC:CRS84",
+      "output": "EPSG:4326",
+      "axis_order": "longitude,latitude",
+      "absent_crs_policy": "RFC 7946; geographic bounds validated"
+    },
+    "tejido": {
+      "declared": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "used": "OGC:CRS84",
+      "output": "EPSG:4326",
+      "axis_order": "longitude,latitude",
+      "absent_crs_policy": "RFC 7946; geographic bounds validated"
+    }
+  },
+  "field_types": {
+    "id": {
+      "int": 1386616
+    },
+    "smp": {
+      "str": 1365957,
+      "NoneType": 20659
+    },
+    "consolidad": {
+      "int": 1386616
+    },
+    "altura": {
+      "float": 1386616
+    },
+    "altos": {
+      "int": 1386616
+    },
+    "origen": {
+      "str": 1386616
+    },
+    "tipo": {
+      "str": 1386616
+    },
+    "fuente": {
+      "str": 1386616
+    }
+  },
+  "height_status": {
+    "valid": 1386615,
+    "implausible": 1,
+    "missing": 0,
+    "zero": 0,
+    "negative": 0,
+    "unparseable": 0
+  },
+  "height_range_all_parsed": [
+    0.1,
+    830.0
+  ],
+  "unparseable_examples": {},
+  "mean_valid_height": 9.685002787367521,
+  "duplicate_id_excess": 20,
+  "duplicate_valid_polygon_geometry_excess": 3479,
+  "parcels_with_multiple_volumes": 272159,
+  "parcel_quality": {
+    "records": 318046,
+    "empty_geometry": 0,
+    "invalid_geometry": 0,
+    "missing_smp": 0
+  },
+  "frontage_quality": {
+    "records": 426664,
+    "missing_identity_or_address": 56737
+  },
+  "duplicate_parcel_smp_keys": 0,
+  "joins": {
+    "parcel_address_single": 373767,
+    "parcel_address_multiple": 620106,
+    "parcel_unmatched": 391569,
+    "exact_smp_but_spatial_conflict": 7507,
+    "address_missing": 1174,
+    "raw_smp_match_records": 0,
+    "parcel_ambiguous": 0
+  },
+  "neighbourhoods": {
+    "Agronomia": {
+      "volumes": 9803,
+      "valid": 9803
+    },
+    "Almagro": {
+      "volumes": 48526,
+      "valid": 48526
+    },
+    "Balvanera": {
+      "volumes": 52250,
+      "valid": 52250
+    },
+    "Barracas": {
+      "volumes": 38710,
+      "valid": 38709,
+      "implausible": 1
+    },
+    "Belgrano": {
+      "volumes": 50886,
+      "valid": 50886
+    },
+    "La Boca": {
+      "volumes": 14179,
+      "valid": 14179
+    },
+    "Boedo": {
+      "volumes": 26667,
+      "valid": 26667
+    },
+    "Caballito": {
+      "volumes": 72779,
+      "valid": 72779
+    },
+    "Chacarita": {
+      "volumes": 15798,
+      "valid": 15798
+    },
+    "Coghlan": {
+      "volumes": 11577,
+      "valid": 11577
+    },
+    "Colegiales": {
+      "volumes": 23362,
+      "valid": 23362
+    },
+    "Constitucion": {
+      "volumes": 17121,
+      "valid": 17121
+    },
+    "Flores": {
+      "volumes": 63966,
+      "valid": 63966
+    },
+    "Floresta": {
+      "volumes": 20945,
+      "valid": 20945
+    },
+    "Liniers": {
+      "volumes": 30413,
+      "valid": 30413
+    },
+    "Mataderos": {
+      "volumes": 44644,
+      "valid": 44644
+    },
+    "Monserrat": {
+      "volumes": 20538,
+      "valid": 20538
+    },
+    "Monte Castro": {
+      "volumes": 21672,
+      "valid": 21672
+    },
+    "Nueva Pompeya": {
+      "volumes": 27318,
+      "valid": 27318
+    },
+    "Nuñez": {
+      "volumes": 25695,
+      "valid": 25695
+    },
+    "Palermo": {
+      "volumes": 95939,
+      "valid": 95939
+    },
+    "Parque Avellaneda": {
+      "volumes": 26536,
+      "valid": 26536
+    },
+    "Parque Chacabuco": {
+      "volumes": 34331,
+      "valid": 34331
+    },
+    "Parque Chas": {
+      "volumes": 12825,
+      "valid": 12825
+    },
+    "Parque Patricios": {
+      "volumes": 20013,
+      "valid": 20013
+    },
+    "Paternal": {
+      "volumes": 12618,
+      "valid": 12618
+    },
+    "Puerto Madero": {
+      "volumes": 1187,
+      "valid": 1187
+    },
+    "Recoleta": {
+      "volumes": 61955,
+      "valid": 61955
+    },
+    "Retiro": {
+      "volumes": 29658,
+      "valid": 29658
+    },
+    "Saavedra": {
+      "volumes": 30543,
+      "valid": 30543
+    },
+    "San Cristobal": {
+      "volumes": 20749,
+      "valid": 20749
+    },
+    "San Nicolas": {
+      "volumes": 28259,
+      "valid": 28259
+    },
+    "San Telmo": {
+      "volumes": 9395,
+      "valid": 9395
+    },
+    "Velez Sarsfield": {
+      "volumes": 20360,
+      "valid": 20360
+    },
+    "Versalles": {
+      "volumes": 9949,
+      "valid": 9949
+    },
+    "Villa Crespo": {
+      "volumes": 38547,
+      "valid": 38547
+    },
+    "Villa Del Parque": {
+      "volumes": 32715,
+      "valid": 32715
+    },
+    "Villa Devoto": {
+      "volumes": 49621,
+      "valid": 49621
+    },
+    "Villa Gral. Mitre": {
+      "volumes": 19562,
+      "valid": 19562
+    },
+    "Villa Lugano": {
+      "volumes": 34193,
+      "valid": 34193
+    },
+    "Villa Luro": {
+      "volumes": 20020,
+      "valid": 20020
+    },
+    "Villa Ortuzar": {
+      "volumes": 14741,
+      "valid": 14741
+    },
+    "Villa Pueyrredon": {
+      "volumes": 24375,
+      "valid": 24375
+    },
+    "Villa Real": {
+      "volumes": 9824,
+      "valid": 9824
+    },
+    "Villa Riachuelo": {
+      "volumes": 8972,
+      "valid": 8972
+    },
+    "Villa Santa Rita": {
+      "volumes": 20592,
+      "valid": 20592
+    },
+    "Villa Soldati": {
+      "volumes": 11579,
+      "valid": 11579
+    },
+    "Villa Urquiza": {
+      "volumes": 50709,
+      "valid": 50709
+    }
+  },
+  "browser_count": 29933,
+  "browser_bytes": 21287183,
+  "browser_scope": [
+    "MONSERRAT",
+    "SAN TELMO"
+  ],
+  "date_like_fields": [],
+  "limitations": [
+    "Representative-point spatial assignment is not a completeness measure.",
+    "Exact cadastral joins do not establish building identity.",
+    "No individual construction years verified."
+  ],
+  "browser_unpacked_bytes": 29089347,
+  "browser_packaging": {
+    "coordinate_decimal_places": 7,
+    "invalid_rounding_fallbacks": 0,
+    "shared_observation": "Hasta 2021 (catálogo); fecha individual desconocida",
+    "full_precision_retained": "data/processed/volumes.ndjson"
+  }
+}
