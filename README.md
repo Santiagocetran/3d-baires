@@ -72,3 +72,9 @@ Para verificar la versión de producción: `npm run build`, luego `npm run previ
 Un registro es un volumen, no necesariamente un edificio. No se prueba completitud con el conteo. Datos hasta 2021, no un relevamiento de 2026. La altura cuestionable de 830 m permanece en los atributos y se dibuja plana. La geometría visual se simplifica a 0,25 m preservando topología; Float32 local se valida después de codificarse. No se recortan polígonos por bloque ni se descartan por densidad/zoom. Alturas originales en ficha; no se estiman años.
 
 Atribución: GCBA, Tejido Urbano, Parcelas/Frentes y Barrios. Recursos de Tejido/Parcelas: CC BY 4.0; catálogos: CC BY 2.5 AR; discrepancia conservada. Mapa base © OpenStreetMap contributors. Motor adaptado de alexbarakov/amsterdam-by-building (MIT), Three.js (MIT). Ver manifiesto y licencias.
+
+## Licencia
+
+El código original y la documentación de 3d-baires se publican bajo [MIT](LICENSE). Las partes adaptadas de Amsterdam conservan el copyright de alexbarakov y su [licencia MIT](licenses/amsterdam-by-building-MIT.txt).
+
+Los datos de GCBA, la cartografía de OpenStreetMap y las dependencias mantienen sus propias licencias; la licencia MIT del proyecto no las sustituye. Consultar [el manifiesto de fuentes y licencias](data/sources.json) para procedencia, atribución y discrepancias de metadatos. Los datos masivos se preparan localmente con los scripts indicados arriba.
