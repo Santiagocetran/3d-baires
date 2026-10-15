@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T13:39:11.450Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "cases": [
+    {
+      "kind": "http",
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: HTTP 503",
+      "renders_before_navigation": 42,
+      "renders_after_navigation": 56
+    },
+    {
+      "kind": "html",
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: tamaño de contenido inválido",
+      "renders_before_navigation": 48,
+      "renders_after_navigation": 50
+    },
+    {
+      "kind": "corrupt",
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: tamaño de contenido inválido",
+      "renders_before_navigation": 44,
+      "renders_after_navigation": 46
+    },
+    {
+      "kind": "abort",
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "No se pudo cargar /data/city/pack1.bin.gz: Failed to fetch",
+      "renders_before_navigation": 39,
+      "renders_after_navigation": 43
+    },
+    {
+      "kind": "worker-error",
+      "event_injection": true,
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "Falló la preparación de una malla 3D. Recargá para reintentar."
+    },
+    {
+      "kind": "worker-messageerror",
+      "event_injection": true,
+      "phase": "error",
+      "loadedBlocks": 1,
+      "error": "Respuesta worker ilegible"
+    },
+    {
+      "kind": "context-loss",
+      "event_injection": false,
+      "phase": "error",
+      "loadedBlocks": 2,
+      "error": "Se perdió el contexto WebGL. Recargá para reintentar."
+    }
+  ],
+  "current_evidence": {
+    "errors": [],
+    "request_failures": [],
+    "optional_basemap_failures": [],
+    "geometry_requests": [
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+    ]
+  },
+  "finished_at": "2026-10-15T13:39:43.559Z"
+}

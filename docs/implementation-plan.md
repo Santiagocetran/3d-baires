@@ -1,6 +1,6 @@
 # Plan de implementación · 2026-10-15
 
-Estado: auditado por Astra el 2026-10-15; correcciones incorporadas. Implementación en curso.
+Estado: completado el 2026-10-15. Plan y código auditados por Astra; correcciones aplicadas y preview final aprobado. Evidencia en `resident-validation-notes.md`.
 
 ## Diagnóstico y comparación
 
@@ -63,3 +63,9 @@ Transporte limitado por tamaños esperados, firma de bytes y validación de payl
 Distinguir buffers CPU residentes, recursos GPU creados al dibujar y memoria real no medida. Checkpoints vinculan configuración, NDJSON, binario y estadísticas; publicación con staging validado y recuperación de backup incluso tras interrupción. Actualización Vite acotada; evaluar aviso MapLibre antes de decidir versión.
 
 Contrato entre implementadores: CityDiagnostics exportado con phase loading/ready/error/disposed, expectedBlocks, loadedBlocks, expectedVolumes, loadedVolumes, expectedPacks, validatedPacks (string[]), loadedBlockIds (string[]), requestAttempts, bufferBytes, retainedPackBytes, renders, error (string|null). Callback diagnostics opcional y getDiagnostics() entregan copia de lectura. selectionState opcional recibe {phase: idle/loading/ready/error, error?:string}. Conservar callbacks existentes. La UI expone window.__cityDiagnostics únicamente como getter de lectura para pruebas; no exponer mutaciones internas. Referencia revisada: Amsterdam commit 4d541802cc47257ce899cc1c75871346c6675c2d; arquitectura residente sin cambio respecto al commit adaptado.
+
+## Entrega y evaluación
+
+Implementado con subagentes Sol 6.1/low (runtime, interfaz y pruebas de navegador), coordinación de integración/pipeline y auditoría final Astra. `plan-audit.md` y `implementation-audit.md` conservan hallazgos y respuestas. No se añadieron historias ni fechas supuestas. Se mantuvo el formato geométrico y las mallas residentes; no fue necesaria una nueva adquisición ni transformación completa de los datos originales. Checkpoints/publicación se probaron con casos de corrupción e interrupción sobre directorios temporales; los paquetes de ciudad existentes se validaron completos.
+
+Los errores de carga detienen nuevos trabajos y conservan dibujo/navegación de las mallas válidas; errores de shader/contexto/render son fatales y requieren recarga. La animación acotada termina incluso tras error de carga. El build mantiene aviso de chunk principal grande; dividirlo o cambiar estrategia de memoria requiere una medición posterior, no se ocultó el aviso.

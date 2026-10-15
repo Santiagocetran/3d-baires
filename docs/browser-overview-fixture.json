@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T13:47:37.988Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "evidence": {
+    "errors": [],
+    "request_failures": [],
+    "optional_basemap_failures": [
+      {
+        "url": "https://tile.openstreetmap.org/16/22142/39489.png",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://tile.openstreetmap.org/16/22139/39494.png",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://tile.openstreetmap.org/16/22142/39488.png",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://tile.openstreetmap.org/16/22138/39486.png",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://tile.openstreetmap.org/15/11068/19744.png",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://tile.openstreetmap.org/15/11070/19743.png",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "geometry_requests": [
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+    ]
+  },
+  "fit": {
+    "camera": {
+      "lng": "-58.431334",
+      "lat": "-34.61806",
+      "zoom": "11.21",
+      "pitch": "0",
+      "bearing": "0",
+      "mode": "height"
+    },
+    "bounds": [
+      -58.53151730936994,
+      -34.705355483937794,
+      -58.33515706489691,
+      -34.526496438656025
+    ],
+    "canvas_css": {
+      "width": 730,
+      "height": 800
+    },
+    "corners_css": [
+      [
+        27.472560136869163,
+        757.5664987609339
+      ],
+      [
+        689.0295702286433,
+        25.355117123535877
+      ]
+    ],
+    "expected_fit_zoom": 11.205636264641086,
+    "tolerance_css_pixels": 4
+  },
+  "camera": {
+    "lng": "-58.431334",
+    "lat": "-34.61806",
+    "zoom": "11.21",
+    "pitch": "0",
+    "bearing": "0",
+    "mode": "height"
+  },
+  "observed": {
+    "phase": "ready",
+    "expectedBlocks": 2,
+    "loadedBlocks": 2,
+    "expectedVolumes": 800,
+    "loadedVolumes": 800,
+    "expectedPacks": 2,
+    "validatedPacks": [
+      "pack0.bin.gz",
+      "pack1.bin.gz"
+    ],
+    "loadedBlockIds": [
+      "1",
+      "0"
+    ],
+    "requestAttempts": 2,
+    "bufferBytes": 238638,
+    "retainedPackBytes": 0,
+    "renders": 68,
+    "error": null
+  },
+  "finished_at": "2026-10-15T13:47:45.567Z"
+}

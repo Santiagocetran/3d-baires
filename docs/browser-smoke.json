@@ -1,10 +1,73 @@
 {
-  "fixture": "800 real central-CABA source volumes",
-  "shader_errors": [],
-  "geometry_pack_requests": 2,
-  "geometry_requests_after_navigation": 2,
-  "gpu_picking": true,
-  "mobile_resize": true,
-  "reduced_motion": true,
-  "selectedText": "×\nVOLUMEN · 19379\n8.4 m\nValor original\n8.4\nEstado de altura\nPositiva y dentro del rango de revisión\nTipo\nEdificio\nParcela (SMP)\n02-001-019\nDirecciones de parcela\nTACUARI 766 · TACUARI 770 · TACUARI 776\nObservación de direcciones\nDesconocida; catastro descargado en 2026\nCoincidencia\nVarios accesos de parcela\nBarrio\nMonserrat\nOrigen\nFotogrametría\nFuente del registro\nSec Planeamiento\nObservación\nHasta 2021 (catálogo); fecha individual desconocida\nConstrucción\nDesconocido\n\nUna parcela puede contener varios volúmenes y accesos. Las direcciones no identifican necesariamente este volumen.\n\nTejido Urbano · GCBA ↗"
+  "status": "passed",
+  "started_at": "2026-10-15T13:33:14.930Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "tests": [
+    {
+      "dpr": 1,
+      "expected_source_id": "44958",
+      "gpu_pick_topdown_tilt_resize": true,
+      "selection_cleared_before_each_pick": true,
+      "blank_selection": true,
+      "mobile_panel": true,
+      "mobile_zoom_control": true,
+      "url_mode": true,
+      "url_reload_restores_camera": true,
+      "reduced_motion_pixel_stability": true,
+      "errors": [],
+      "request_failures": [],
+      "optional_basemap_failures": [],
+      "geometry_requests": [
+        "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+      ]
+    },
+    {
+      "dpr": 2,
+      "expected_source_id": "44958",
+      "gpu_pick_topdown_tilt_resize": true,
+      "selection_cleared_before_each_pick": true,
+      "blank_selection": true,
+      "mobile_panel": true,
+      "mobile_zoom_control": true,
+      "url_mode": true,
+      "url_reload_restores_camera": true,
+      "reduced_motion_pixel_stability": true,
+      "errors": [],
+      "request_failures": [],
+      "optional_basemap_failures": [],
+      "geometry_requests": [
+        "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+        "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+      ]
+    },
+    {
+      "stale_attributes_ignored": true
+    },
+    {
+      "attribute_failure_keeps_city_ready": true,
+      "other_tile_selection_after_attribute_error": "219524",
+      "geometry_requests": 2
+    }
+  ],
+  "current_evidence": {
+    "errors": [],
+    "request_failures": [],
+    "optional_basemap_failures": [],
+    "geometry_requests": [
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+    ]
+  },
+  "fixture": "800 volúmenes reales de CABA",
+  "finished_at": "2026-10-15T13:34:32.035Z"
 }

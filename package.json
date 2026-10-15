@@ -10,10 +10,13 @@
     "preview": "vite preview --host 127.0.0.1",
     "test:mesh": "tsx --test tests/city-mesh.test.ts",
     "validate:city": "tsx scripts/validate-resident.ts",
-    "test:browser": "node scripts/browser-smoke.mjs"
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "test": "tsx --test tests/*.test.ts",
+    "test:browser:city": "node scripts/browser-city.mjs",
+    "test:browser:negative": "node scripts/browser-negative.mjs"
   },
   "dependencies": {
-    "maplibre-gl": "5.6.0",
+    "maplibre-gl": "6.4.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "three": "0.180.0"
@@ -28,6 +31,6 @@
     "pbf": "3.3.0",
     "tsx": "4.23.15",
     "typescript": "5.8.3",
-    "vite": "6.3.5"
+    "vite": "6.4.4"
   }
 }

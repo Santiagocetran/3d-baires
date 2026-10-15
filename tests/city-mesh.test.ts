@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {buildMesh} from '../src/city-mesh';
+import {buildMesh,validateMeshIdentity} from '../src/city-mesh';
 // Independent fixture: one volume, polygon with a hole, plus disjoint polygon.
 function fixture(height=12){
   const rings=[[[0,0],[10,0],[10,10],[0,10]],[[3,3],[3,7],[7,7],[7,3]],[[20,0],[22,0],[22,2],[20,2]]];
@@ -31,4 +31,18 @@ test('bad format and unvalidated heights fail instead of fabricating geometry',(
   const buf=fixture();new DataView(buf).setUint32(0,0,true);assert.throws(()=>buildMesh(buf),/CBA1/);
   assert.throws(()=>buildMesh(fixture(830)),/Altura/);
   assert.throws(()=>buildMesh(fixture().slice(0,100)));
+});
+test('rejects nonmonotone indices, infinity heights and nonfinite coordinates before triangulation',()=>{
+ assert.throws(()=>buildMesh(fixture(Infinity)),/Altura/);
+ const bad=fixture();new DataView(bad).setUint32(40,3,true);assert.throws(()=>buildMesh(bad),/índices|Índices/);
+ const coords=fixture();new DataView(coords).setFloat32(coords.byteLength-4,Infinity,true);assert.throws(()=>buildMesh(coords),/Coordenada/);
+ const huge=fixture();new DataView(huge).setUint32(16,0xffffffff,true);assert.throws(()=>buildMesh(huge));
+});
+
+test('worker texture identity must match source IDs and expected block',()=>{
+ const m=buildMesh(fixture());validateMeshIdentity(m,1,42,[600,-1200]);
+ assert.throws(()=>validateMeshIdentity(m,2,42,[600,-1200]));
+ assert.throws(()=>validateMeshIdentity(m,1,41,[600,-1200]));
+ assert.throws(()=>validateMeshIdentity(m,1,42,[0,-1200]));
+ m.attr[1]=41;assert.throws(()=>validateMeshIdentity(m,1,42,[600,-1200]),/Identidad/);
 });

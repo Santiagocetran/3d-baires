@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "started_at": "2026-10-15T13:36:09.457Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "error": "browserType.launch: Failed to launch chromium because executable doesn't exist at /tmp/3d-baires-chromium-does-not-exist\n    at launch (/home/agent/3d-baires/scripts/browser-helpers.mjs:5:34)\n    at reportRun (/home/agent/3d-baires/scripts/browser-helpers.mjs:10:20)\n    at async file:///home/agent/3d-baires/scripts/browser-city.mjs:6:1",
+  "finished_at": "2026-10-15T13:36:09.475Z"
+}

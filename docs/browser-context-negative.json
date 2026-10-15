@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T13:39:05.669Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "cases": [
+    {
+      "kind": "context-loss",
+      "event_injection": false,
+      "phase": "error",
+      "loadedBlocks": 2,
+      "error": "Se perdió el contexto WebGL. Recargá para reintentar."
+    }
+  ],
+  "current_evidence": {
+    "errors": [],
+    "request_failures": [],
+    "optional_basemap_failures": [],
+    "geometry_requests": [
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+    ]
+  },
+  "finished_at": "2026-10-15T13:39:08.558Z"
+}

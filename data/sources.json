@@ -93,7 +93,7 @@
   "software": [
     {
       "name": "maplibre-gl",
-      "version": "5.6.0",
+      "version": "6.4.1",
       "license": "BSD-3-Clause"
     },
     {
@@ -108,7 +108,7 @@
     },
     {
       "name": "vite",
-      "version": "6.3.5",
+      "version": "6.4.4",
       "license": "MIT"
     },
     {
@@ -135,7 +135,9 @@
       "license": "MIT",
       "copyright": "2026 alexbarakov",
       "url": "https://github.com/alexbarakov/amsterdam-by-building",
-      "license_file": "licenses/amsterdam-by-building-MIT.txt"
+      "license_file": "licenses/amsterdam-by-building-MIT.txt",
+      "comparison_review_commit": "4d541802cc47257ce899cc1c75871346c6675c2d",
+      "reviewed_at": "2026-10-15"
     }
   ],
   "previous_browser_artifacts": {
@@ -154,11 +156,14 @@
     "validation": "docs/resident-validation.json",
     "browser_validation": [
       "docs/browser-smoke.json",
-      "docs/browser-city.json"
+      "docs/browser-city.json",
+      "docs/browser-preview.json",
+      "docs/browser-negative.json"
     ],
     "geometry_simplification_m": 0.25,
     "age_data": "unknown for all volumes",
-    "historical_layer": "not displayed"
+    "historical_layer": "not displayed",
+    "validation_semantics": "Exact resident block/pack sets and source-record totals; SwiftShader functional checks, not hardware FPS/GPU-memory benchmark"
   },
   "previous_mvt_artifacts": {
     "scope": "CABA, 48 barrios",

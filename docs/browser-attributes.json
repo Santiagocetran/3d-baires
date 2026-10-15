@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-15T13:40:03.029Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "tests": [
+    {
+      "expected_attribute_errors": [
+        "HTTP 503 http://127.0.0.1:5173/data/city/attrs0.json.gz",
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/attrs0.json.gz)",
+        "HTTP 503 http://127.0.0.1:5173/data/city/attrs0.json.gz",
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/attrs0.json.gz)",
+        "HTTP 503 http://127.0.0.1:5173/data/city/attrs0.json.gz",
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/attrs0.json.gz)"
+      ],
+      "attribute_failure_keeps_city_ready": true,
+      "other_tile_selection_after_attribute_error": "219524",
+      "geometry_requests": 2
+    }
+  ],
+  "fixture": "800 volúmenes reales de CABA",
+  "test_scope": "sólo atributos",
+  "finished_at": "2026-10-15T13:40:16.067Z"
+}

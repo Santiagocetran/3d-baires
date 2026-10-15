@@ -1,41 +1,25 @@
-// Whole-city resident loading and request continuity check. Software WebGL is not a hardware FPS benchmark.
-import {chromium} from '@playwright/test';
-import {writeFile,mkdir} from 'node:fs/promises';
+import {readFile} from 'node:fs/promises';
+// Exact whole-city completion gate; SwiftShader does not measure hardware FPS.
 import assert from 'node:assert/strict';
-const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),headless:true,args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const page=await browser.newPage({viewport:{width:1100,height:800}});
-const errors=[],requests=[];
-page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!m.text().includes('ERR_FAILED'))errors.push(m.text())});
-page.on('request',r=>{if(/pack-.*\.bin\.gz/.test(r.url()))requests.push(r.url())});
-await page.route('https://tile.openstreetmap.org/**',r=>r.abort());
-const start=Date.now();
-try{
- await page.goto('http://127.0.0.1:5173');
- await page.waitForFunction(()=>!document.querySelector('nav button')?.hasAttribute('disabled'));
- for(let i=0;i<120;i++){
-  const text=await page.locator('body').innerText();
-  const progress=text.match(/Preparando ciudad 3D[^\n]*/)?.[0];
-  if(!progress)break;
-  console.log(progress);
-  assert.equal(await page.locator('.error').count(),0,text);
-  await page.waitForTimeout(5000);
- }
- assert.ok(!(await page.locator('body').innerText()).includes('Preparando ciudad 3D'),'Whole city must finish');
- assert.equal(errors.length,0,errors.join('\n'));
- const loadMs=Date.now()-start,before=requests.length;
- await page.waitForTimeout(1500);
- await mkdir('data/processed/browser-check',{recursive:true});
- await page.screenshot({path:'data/processed/browser-check/full-city.png',timeout:60000});
- for(const name of ['Palermo','Villa Lugano','Belgrano','Monserrat']){
-  const select=page.locator('select');
-  const options=await select.locator('option').allTextContents();
-  const label=options.find(o=>o.toLowerCase()===name.toLowerCase());assert.ok(label);
-  await select.selectOption({label});await page.waitForTimeout(1800);
- }
- await page.getByRole('button',{name:'Alejar',exact:true}).click({clickCount:4,delay:100});await page.waitForTimeout(2000);
- await page.screenshot({path:'data/processed/browser-check/city-overview.png',timeout:60000});
- assert.equal(requests.length,before);
- assert.equal(errors.length,0,errors.join('\n'));
- const report={full_city:true,software_webgl:true,load_ms:loadMs,geometry_pack_requests:before,geometry_requests_after_neighbourhoods_and_zoom:requests.length,shader_or_page_errors:errors,hardware_fps_measured:false};
- await writeFile('docs/browser-city.json',JSON.stringify(report,null,2)+'\n');console.log(report);
-}finally{await browser.close()}
+import {createHash} from 'node:crypto';
+import {baseURL,reportRun,observe,ready,validate,clean,screenshot,fixture,scopeBounds,overviewFit} from './browser-helpers.mjs';
+await reportRun(process.env.BROWSER_REPORT||'docs/browser-city.json',async (browser,report)=>{
+ const page=await browser.newPage({viewport:{width:1100,height:800}}),evidence=await observe(page);
+ Object.assign(report,{evidence,scenario:process.env.CITY_FIXTURE_FAILURE?'fallo HTTP después de un bloque real':'ciudad completa'});
+ if(process.env.CITY_FIXTURE_FAILURE)await fixture(page,async(route,name)=>{if(name!=='pack1.bin.gz')return false;await page.waitForFunction(()=>window.__cityDiagnostics?.loadedBlocks===1);await route.fulfill({status:503,body:'Injected partial load failure'});return true});
+ const scopeResponse=await page.request.get(`${baseURL}/data/caba-scope.geojson`);assert.ok(scopeResponse.ok());const bounds=scopeBounds(await scopeResponse.json());report.scope_bounds=bounds;
+ const response=await page.request.get(`${baseURL}/data/city/city.json`);assert.ok(response.ok());const manifestText=process.env.CITY_FIXTURE_FAILURE?await readFile('data/processed/browser-fixture/city.json','utf8'):await response.text(),manifest=JSON.parse(manifestText);report.manifest_sha256=createHash('sha256').update(manifestText).digest('hex');report.manifest_expected={blocks:manifest.tiles.length,volumes:manifest.tiles.reduce((n,t)=>n+t.n,0),packs:manifest.packs.length}; const record=async()=>{report.observed=await page.evaluate(()=>window.__cityDiagnostics).catch(()=>null);report.observed_camera=Object.fromEntries(new URL(page.url()).searchParams)};
+ page.on('crash',()=>{report.observed_error='page crashed'});
+
+ try{
+ const start=Date.now();await page.goto(baseURL);const before=await ready(page,manifest,Number(process.env.CITY_TIMEOUT_MS)||600000).catch(async error=>{await record();throw error}),load_ms=Date.now()-start;
+ clean(evidence);await screenshot(page,'full-city');const requests=evidence.geometry_requests.length;
+ for(const name of ['Palermo','Villa Lugano','Belgrano','Monserrat']){await page.locator('select').selectOption({label:name});await page.waitForTimeout(1800);validate(await page.evaluate(()=>window.__cityDiagnostics),manifest)}
+ const overviewStart=await page.evaluate(()=>window.__cityDiagnostics.renders);
+ await page.getByRole('button',{name:'Ver toda CABA',exact:true}).click({timeout:60000});
+ await page.waitForFunction(renders=>{const q=new URL(location.href).searchParams,d=window.__cityDiagnostics;return q.has('zoom')&&Number(q.get('zoom'))<=13&&Number(q.get('pitch'))===0&&Number(q.get('bearing'))===0&&d?.phase==='ready'&&d.renders>renders},overviewStart,{timeout:60000});
+ const overview_camera=Object.fromEntries(new URL(page.url()).searchParams);report.overview_camera=overview_camera;const overview_fit=await overviewFit(page,bounds);report.overview_fit=overview_fit;
+ const after=await page.evaluate(()=>window.__cityDiagnostics);validate(after,manifest);assert.ok(after.renders>before.renders);assert.equal(after.bufferBytes,before.bufferBytes);assert.equal(after.retainedPackBytes,before.retainedPackBytes);assert.equal(evidence.geometry_requests.length,requests,'Navigation must not fetch more geometry');clean(evidence);await screenshot(page,'city-overview');
+ return {full_city:true,load_ms,manifest_expected:{blocks:manifest.tiles.length,volumes:manifest.tiles.reduce((n,t)=>n+t.n,0),packs:manifest.packs.length},before,after,overview_camera,overview_fit,...evidence};
+ }finally{await record()}
+});

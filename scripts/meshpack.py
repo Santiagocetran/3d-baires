@@ -16,6 +16,8 @@ import time
 import sys
 import numpy as np
 import shapely
+import pyproj
+from meshpack_io import sha256, digest, save_json, verify_checkpoint, cached_block, save_block, publish_city, recover_publication
 from shapely.geometry import shape
 from pyproj import Transformer
 ROOT=Path(__file__).resolve().parents[1]
@@ -63,13 +65,17 @@ def run():
     work=ROOT/'data/processed/meshpack-work'
     resume='--resume' in sys.argv
     source=ROOT/'data/processed/volumes.ndjson'
-    source_hash=hashlib.file_digest(source.open('rb'),'sha256').hexdigest()
+    source_hash=sha256(source)
+    signature=digest({'version':2,'format':'CBA1','origin':ORIGIN,'tile':TILE,'simplification':0.25,
+        'numpy':np.__version__,'shapely':shapely.__version__,'pyproj':pyproj.__version__,
+        'processor_sha256':sha256(Path(__file__))})
+    target=ROOT/'public/data/city'
+    recover_publication(target)
     if work.exists() and not resume:shutil.rmtree(work)
     work.mkdir(exist_ok=True)
     handles={};count=0
     if resume:
-        checkpoint=json.loads((work/'checkpoint.json').read_text())
-        assert checkpoint['source_sha256']==source_hash, 'Input changed: cannot resume'
+        checkpoint=verify_checkpoint(work,source_hash,signature)
         count=checkpoint['records']
         handles={tuple(map(int,p.stem.split('_'))):None for p in work.glob('*.ndjson')}
     else:
@@ -82,8 +88,11 @@ def run():
                 handles[key].write(line);count+=1
                 if count%200000==0:print('Grouped',count,flush=True)
         for h in handles.values():h.close()
-        (work/'checkpoint.json').write_text(json.dumps({'source_sha256':source_hash,'records':count}))
-    target=ROOT/'public/data/city';staging=work/'city';staging.mkdir(exist_ok=True);(staging/'attrs').mkdir(exist_ok=True)
+        save_json(work/'checkpoint.json',{'source_sha256':source_hash,'signature':signature,'records':count,
+            'groups':{p.name:sha256(p) for p in sorted(work.glob('*.ndjson'))}})
+    staging=work/'city'
+    if staging.exists():shutil.rmtree(staging)
+    staging.mkdir();(staging/'attrs').mkdir()
     cache=work/'cache';cache.mkdir(exist_ok=True)
     index=[];totals={'records':0,'vertices':0,'input_coordinates':0,'parts':0,'rings':0};max_row=0
     keys=sorted(handles,key=lambda k:((k[0]+0.5)**2+(k[1]+0.5)**2,k))
@@ -100,14 +109,14 @@ def run():
         rows=[json.loads(l) for l in (work/f'{key[0]}_{key[1]}.ndjson').open()]
         origin=np.array(key)*TILE
         cached=cache/f'{key[0]}_{key[1]}'
-        if cached.with_suffix('.bin').exists() and cached.with_suffix('.json').exists():
-            blob=cached.with_suffix('.bin').read_bytes()
-            stats=json.loads(cached.with_suffix('.json').read_text())
+        group_hash=sha256(work/f'{key[0]}_{key[1]}.ndjson')
+        hit=cached_block(cached,group_hash,signature)
+        if hit:
+            blob,stats=hit
             attrs=[{k:v for k,v in f['properties'].items() if k not in ('observation','smp_join_key')} for f in rows]
         else:
             blob,attrs,stats=pack_tile(rows,origin)
-            cached.with_suffix('.bin').write_bytes(blob)
-            cached.with_suffix('.json').write_text(json.dumps(stats))
+            save_block(cached,blob,stats,group_hash,signature)
         if len(pack)+len(blob)>8_000_000:flush_pack()
         name=f'{key[0]}_{key[1]}'
         entry={'id':name,'origin':origin.tolist(),'n':len(rows),'offset':len(pack),'length':len(blob),'attrs':f'attrs/{name}.json.gz'}
@@ -119,13 +128,12 @@ def run():
     flush_pack()
     assert totals['records']==count
     audit=json.loads((ROOT/'docs/audit-results.json').read_text());assert count==audit['counts']['records']
-    config={'format':'CBA1','origin':ORIGIN,'tile_size_m':TILE,'cos_origin':COS,'max_source_row':max_row,
+    config={'format':'CBA1','source_sha256':source_hash,'pipeline_signature':signature,'origin':ORIGIN,'tile_size_m':TILE,'cos_origin':COS,'max_source_row':max_row,
             'tiles':index,'packs':packs,'stats':totals,'source_records':count,'simplification_m':0.25,
             'coordinate_encoding':'Float32 local metres; no clipping; topology checked after encoding',
             'observation':'Hasta 2021; fecha individual desconocida'}
     (staging/'city.json').write_text(json.dumps(config,ensure_ascii=False,separators=(',',':')))
-    if target.exists():shutil.rmtree(target)
-    staging.rename(target)
+    publish_city(staging,target)
     scope=ROOT/'public/data/caba-scope.geojson';scope.write_bytes((ROOT/'data/raw/barrios.geojson').read_bytes())
     report={**totals,'blocks':len(index),'packs':len(packs),'geometry_download_bytes':sum(p['bytes'] for p in packs),
             'geometry_uncompressed_bytes':sum(p['uncompressed_bytes'] for p in packs),

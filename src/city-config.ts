@@ -1,0 +1,10 @@
+export type Tile={id:string;origin:[number,number];n:number;pack:string;offset:number;length:number;attrs:string};
+export type CityConfig={format?:string;origin:[number,number];cos_origin:number;max_source_row:number;source_records:number;tiles:Tile[];packs:{file:string;bytes:number;uncompressed_bytes?:number}[]};
+const integer=(v:number,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(v)&&v>=min&&v<=max;
+const path=(v:string)=>typeof v==='string'&&v.split('/').every(p=>/^[a-zA-Z0-9_.-]+$/.test(p)&&p!=='.'&&p!=='..');
+export function validateConfig(c:CityConfig){
+ if(!c||(c.format!==undefined&&c.format!=='CBA1')||!Array.isArray(c.origin)||c.origin.length!==2||!c.origin.every(Number.isFinite)||Math.abs(c.origin[0])>180||Math.abs(c.origin[1])>85||!Number.isFinite(c.cos_origin)||c.cos_origin<=0||c.cos_origin>1||Math.abs(c.cos_origin-Math.cos(c.origin[1]*Math.PI/180))>1e-10||!integer(c.max_source_row,0,16777213)||!integer(c.source_records,1,c.max_source_row+1)||!Array.isArray(c.tiles)||!c.tiles.length||!Array.isArray(c.packs)||!c.packs.length)throw new Error('Configuración de ciudad inválida');
+ const packs=new Map<string,number>();for(const p of c.packs){if(!path(p.file)||packs.has(p.file)||!integer(p.bytes,1,256e6))throw new Error('Paquete de configuración inválido');packs.set(p.file,0)}
+ const ids=new Set<string>();let total=0;for(const t of c.tiles){if(typeof t.id!=='string'||ids.has(t.id)||!path(t.attrs)||!packs.has(t.pack)||!integer(t.n,1,65535)||!integer(t.offset)||!integer(t.length,28,128e6)||t.offset!==packs.get(t.pack)||!Array.isArray(t.origin)||t.origin.length!==2||!t.origin.every(Number.isFinite))throw new Error('Bloque de configuración inválido');ids.add(t.id);packs.set(t.pack,t.offset+t.length);total+=t.n}
+ if(total!==c.source_records||[...packs.values()].some(n=>n<=0||n>256e6))throw new Error('Totales de configuración inválidos');for(const p of c.packs)if(p.uncompressed_bytes!==undefined&&p.uncompressed_bytes!==packs.get(p.file))throw new Error('Tamaño declarado de paquete inválido');return packs;
+}

@@ -25,7 +25,9 @@ La interfaz usa mallas Three.js persistentes, preparadas en workers a partir de 
 | records_excluded | 0 |
 | encoded_topology_failures | 0 |
 | successful_run_seconds | 139.6 |
-| resumed | 1 |
+| resumed | True |
+
+La auditoría de transporte del 2026-10-15 invalidó un resultado anterior de navegador (967 ms, sólo un paquete). Los informes actuales exigen estado estructurado y conjuntos completos; ver `resident-validation-notes.md` y `browser-city.json`. La validación de datos no demuestra por sí sola rendimiento gráfico.
 
 Verificación de mallas:
 
@@ -80,7 +82,7 @@ Comprobación MVT (zoom 15):
 | Exceso de geometrías válidas idénticas | 3,479 |
 | SMP con múltiples volúmenes | 272,159 |
 
-Bounds EPSG:4326 (oeste, sur, este, norte): `[-58.53041508692756, -34.70014960827453, -58.335709138211556, -34.53181147971989]`. CRS originales y transformaciones: `audit-results.json → crs`. Entrada CRS84, salida longitud/latitud WGS84; si corresponde reproyección se usa pyproj con `always_xy=True`. El NDJSON conserva precisión completa. La entrega al navegador redondea coordenadas a 7 decimales (orden de un centímetro, sin afirmar esa precisión del relevamiento), revierte al original si el redondeo invalida el polígono, y comparte la fecha de observación en metadatos. No se reparan geometrías. Se excluyen geometrías inválidas, vacías, no poligonales y sin barrio único del producto procesado; se conservan crudas y se contabilizan. Duplicados geométricos se detectan normalizando anillos con Shapely; no se eliminan automáticamente.
+Bounds EPSG:4326 (oeste, sur, este, norte): `[-58.53041508692756, -34.70014960827453, -58.335709138211556, -34.53181147971989]`. CRS originales y transformaciones: `audit-results.json → crs`. Entrada CRS84, salida longitud/latitud WGS84; si corresponde reproyección se usa pyproj con `always_xy=True`. El NDJSON conserva precisión completa. El antecedente GeoJSON redondea coordenadas a 7 decimales (orden de un centímetro, sin afirmar esa precisión del relevamiento), revierte al original si el redondeo invalida el polígono, y comparte la fecha de observación en metadatos. No se reparan geometrías. Se excluyen geometrías inválidas, vacías, no poligonales y sin barrio único del producto procesado; se conservan crudas y se contabilizan. Duplicados geométricos se detectan normalizando anillos con Shapely; no se eliminan automáticamente.
 
 ### Alturas y esquema
 
@@ -193,13 +195,13 @@ Un barrio se asigna por el punto interior de cada polígono válido, no por su c
 | Villa Soldati | 11,579 | 11,579 |
 | Villa Urquiza | 50,709 | 50,709 |
 
-## Tamaño y alcance del navegador
+## Antecedente GeoJSON: tamaño y alcance
 
-Fuentes: 1,576,456,584 bytes. Tejido solo: 1,087,959,837 bytes. Recorte de San Telmo y Monserrat, después de compactar la entrega: **29,933 volúmenes**, **21,287,183 bytes** de GeoJSON sin comprimir. Se descarta enviar el archivo citywide de 1,09 GB al cliente; no se afirma rendimiento citywide. Límite preventivo de publicación: 25 MB. NDJSON citywide se mantiene fuera del navegador y de Git. La siguiente etapa deberá generar teselas vectoriales y medir memoria/FPS.
+Fuentes: 1,576,456,584 bytes. Tejido solo: 1,087,959,837 bytes. Recorte de San Telmo y Monserrat, después de compactar la entrega: **29,933 volúmenes**, **21,287,183 bytes** de GeoJSON sin comprimir. Se descarta enviar el archivo citywide de 1,09 GB al cliente; no se afirma rendimiento citywide. Límite preventivo de publicación: 25 MB. NDJSON citywide se mantiene fuera del navegador y de Git. La entrega activa usa paquetes residentes (mediciones al inicio); las teselas posteriores también quedan como antecedente. Falta medir memoria/FPS en hardware real.
 
 ## Historias y fechas
 
-12 relatos originales con fuentes oficiales; 10 marcadores ubicados por dirección exacta y parcela única. Los restantes conservan la dirección textual sin inventar coordenadas. `history-matches.json` registra parcela y volúmenes candidatos cuya posición coincide, **no una identidad confirmada de edificio**. Dos fechas de construcción tipificadas se muestran en puntos históricos (Palacio Vera y Casa de la Cultura); ninguna se propaga a los volúmenes. Las demás fechas son inauguración, intervalos o cambios de uso y no se convierten en año de construcción.
+12 relatos originales con fuentes oficiales; 10 marcadores ubicados por dirección exacta y parcela única. Los restantes conservan la dirección textual sin inventar coordenadas. `history-matches.json` registra parcela y volúmenes candidatos cuya posición coincide, **no una identidad confirmada de edificio**. En la primera versión se mostraron dos fechas de construcción tipificadas en puntos históricos (Palacio Vera y Casa de la Cultura); ninguna se propaga a los volúmenes. Las demás fechas son inauguración, intervalos o cambios de uso y no se convierten en año de construcción.
 
 ## Licencias y procedencia
 

@@ -1,0 +1,59 @@
+{
+  "status": "failed",
+  "started_at": "2026-10-15T13:39:46.191Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "evidence": {
+    "errors": [
+      "HTTP 503 http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/pack1.bin.gz)",
+      "HTTP 503 http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/pack1.bin.gz)",
+      "HTTP 503 http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable) (http://127.0.0.1:5173/data/city/pack1.bin.gz)"
+    ],
+    "request_failures": [
+      {
+        "url": "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "optional_basemap_failures": [],
+    "geometry_requests": [
+      "http://127.0.0.1:5173/data/city/pack0.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz",
+      "http://127.0.0.1:5173/data/city/pack1.bin.gz"
+    ]
+  },
+  "scenario": "fallo HTTP después de un bloque real",
+  "manifest_sha256": "661b1208419b684298abea38889afcda77d1123225eb764dd5450b037dcaec48",
+  "manifest_expected": {
+    "blocks": 2,
+    "volumes": 800,
+    "packs": 2
+  },
+  "observed": {
+    "phase": "error",
+    "expectedBlocks": 2,
+    "loadedBlocks": 1,
+    "expectedVolumes": 800,
+    "loadedVolumes": 400,
+    "expectedPacks": 2,
+    "validatedPacks": [
+      "pack0.bin.gz"
+    ],
+    "loadedBlockIds": [
+      "0"
+    ],
+    "requestAttempts": 4,
+    "bufferBytes": 120924,
+    "retainedPackBytes": 0,
+    "renders": 44,
+    "error": "No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: HTTP 503"
+  },
+  "error": "AssertionError [ERR_ASSERTION]: {\"phase\":\"error\",\"expectedBlocks\":2,\"loadedBlocks\":1,\"expectedVolumes\":800,\"loadedVolumes\":400,\"expectedPacks\":2,\"validatedPacks\":[\"pack0.bin.gz\"],\"loadedBlockIds\":[\"0\"],\"requestAttempts\":4,\"bufferBytes\":120924,\"retainedPackBytes\":0,\"renders\":44,\"error\":\"No se pudo cargar /data/city/pack1.bin.gz: /data/city/pack1.bin.gz: HTTP 503\"}\n\n'error' !== 'ready'\n\n    at ready (file:///home/agent/3d-baires/scripts/browser-helpers.mjs:31:67)\n    at async file:///home/agent/3d-baires/scripts/browser-city.mjs:14:63\n    at async reportRun (file:///home/agent/3d-baires/scripts/browser-helpers.mjs:10:50)\n    at async file:///home/agent/3d-baires/scripts/browser-city.mjs:6:1",
+  "finished_at": "2026-10-15T13:39:48.918Z"
+}

@@ -12,6 +12,10 @@ Explorar Capital Federal en 3D mediante volúmenes reales de Tejido Urbano. Prio
 - Antigüedad desconocida en gris. No hay fechas verificadas asociadas a volúmenes en la entrega actual. No inventar un gradiente de edades ni trasladar fechas de inauguración a construcción.
 - OSM opcional, atribución y dependencia de red visibles. Sin despliegues, remotos ni contacto con terceros.
 
+## Iteración de fiabilidad y exploración · 2026-10-15
+
+Transporte gzip compatible con Fetch, manifiesto/índices validados y estados completos verificables. Selección con errores independientes. Vista general basada en límites oficiales, URL de cámara/capa y panel móvil plegable. Checkpoints verificables y publicación recuperable. Plan auditado antes de implementar; revisión final y evidencia en documentos de validación.
+
 ## Backlog priorizado
 
 1. Encontrar y auditar una fuente reutilizable de antigüedad/año de construcción con identificadores compatibles. Separar fecha de proyecto, permiso, construcción e inauguración; resolver cambios catastrales y ambigüedades.

@@ -34,3 +34,7 @@ Normalizar SMP sólo mediante espacios alrededor del guion y sección numérica 
 ## Enfoque actual
 
 Ciudad 3D residente con Three.js, adaptada de Amsterdam (MIT), integrada en cámara/mapa base MapLibre. Preparar con `.venv/bin/python scripts/meshpack.py`; verificar con `npm run test:mesh`, `npm run validate:city` y `npm run test:browser` (requiere fixture/Chromium, ver README). No volver a introducir descarga de mallas al cambiar zoom sin discutir el cambio de producto. Mantener atribución y licencia de código adaptado. Historias fuera de la interfaz; edades desconocidas hasta conseguir fuentes vinculables. Animación visual en GPU, nunca cronología. Respeta movimiento reducido. Recorte GeoJSON y MVT anteriores quedan como antecedentes.
+
+## Verificación de carga residente
+
+`npm test` ejecuta todas las pruebas TS. `npm run test:browser:negative` verifica fallos parciales y `npm run test:browser:city` exige la ciudad completa (Vite abierto; `BROWSER_BASE_URL`/`CHROMIUM_PATH` configurables). No inferir éxito por desaparición del progreso. Exigir fase ready, conjuntos exactos de bloques/paquetes, totales y render posterior. Informes de navegador deben sobrescribirse como failed ante fallo, sin conservar éxitos previos. Distinguir buffers CPU residentes de recursos GPU y memoria real medida. Gzip puede llegar ya decodificado por Fetch; inspeccionar bytes. Checkpoints sólo se reutilizan si entrada, configuración y checksums coinciden.

@@ -1,0 +1,23 @@
+{
+  "status": "failed",
+  "started_at": "2026-10-15T13:39:53.967Z",
+  "base_url": "http://127.0.0.1:5173",
+  "software_webgl": true,
+  "hardware_fps_measured": false,
+  "basemap": "Teselas OSM sustituidas por PNG neutro local; conectividad externa no evaluada",
+  "evidence": {
+    "errors": [],
+    "request_failures": [],
+    "optional_basemap_failures": [],
+    "geometry_requests": []
+  },
+  "scenario": "fallo HTTP después de un bloque real",
+  "manifest_sha256": "661b1208419b684298abea38889afcda77d1123225eb764dd5450b037dcaec48",
+  "manifest_expected": {
+    "blocks": 2,
+    "volumes": 800,
+    "packs": 2
+  },
+  "error": "page.waitForFunction: Timeout 1ms exceeded.\n    at ready (/home/agent/3d-baires/scripts/browser-helpers.mjs:30:13)\n    at /home/agent/3d-baires/scripts/browser-city.mjs:14:69\n    at async reportRun (/home/agent/3d-baires/scripts/browser-helpers.mjs:10:50)\n    at async file:///home/agent/3d-baires/scripts/browser-city.mjs:6:1",
+  "finished_at": "2026-10-15T13:39:54.742Z"
+}

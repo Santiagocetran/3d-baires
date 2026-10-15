@@ -21,7 +21,7 @@ python3 -m venv .venv
 npm run dev
 ```
 
-Con los datos actuales ya preparados basta `npm run dev`. Para regenerar únicamente la ciudad residente desde NDJSON auditado, ejecutar `scripts/meshpack.py`. Si la preparación se interrumpe, `.venv/bin/python scripts/meshpack.py --resume` reutiliza bloques terminados y verifica que el checksum de entrada no cambió. No se necesita Tippecanoe para esta entrega. Los scripts MVT y el recorte original siguen como antecedentes/regresión.
+Con los datos actuales ya preparados basta `npm run dev`. Para regenerar únicamente la ciudad residente desde NDJSON auditado, ejecutar `scripts/meshpack.py`. Si la preparación se interrumpe, `.venv/bin/python scripts/meshpack.py --resume` verifica entrada, configuración/versiones, grupos NDJSON, binarios y estadísticas antes de reutilizar bloques. Checkpoints antiguos no se aceptan: repetir sin `--resume`. La publicación valida staging y conserva una copia recuperable hasta completar la promoción; una interrupción entre renombres se recupera al iniciar nuevamente el script. No se necesita Tippecanoe para esta entrega. Los scripts MVT y el recorte original siguen como antecedentes/regresión.
 
 Abrir **http://127.0.0.1:5173**. Desde el equipo conectado por SSH:
 
@@ -31,15 +31,15 @@ ssh -N -L 5173:127.0.0.1:5173 usuario@dispositivo
 
 Abrir **http://localhost:5173** en ese equipo. No se expone el servidor a internet.
 
-Arrastrar mueve; rueda o +/− acercan; botón derecho y arrastre giran/inclinan. El selector salta a cualquier barrio. El indicador muestra preparación global de la ciudad, no nuevas descargas por viewport. Los bloques cargados permanecen y sólo se omite su dibujo cuando están fuera de cámara. «Animar volúmenes» repite la llegada visual; no representa historia constructiva. Se respeta movimiento reducido.
+Arrastrar mueve; rueda o +/− acercan; botón derecho y arrastre giran/inclinan. El selector salta a cualquier barrio; «Ver toda CABA» encuadra los límites oficiales. La URL conserva cámara y capa; «Copiar enlace de esta vista» permite compartirlas. En móvil el panel se puede contraer. El indicador muestra preparación global de la ciudad, no nuevas descargas por viewport. Los bloques cargados permanecen y sólo se omite su dibujo cuando están fuera de cámara. «Animar volúmenes» repite la llegada visual; no representa historia constructiva. Se respeta movimiento reducido.
 
-El mapa base OSM es opcional y requiere internet. Sus teselas sí cambian al navegar. Los edificios y límites se sirven localmente, sin cuenta, API key ni backend. Los archivos `.gz` son paquetes explícitos que el cliente descomprime: **no agregar `Content-Encoding: gzip`** a esas rutas, pues causaría doble descompresión.
+El mapa base OSM es opcional y requiere internet. Sus teselas sí cambian al navegar. Los edificios y límites se sirven localmente, sin cuenta, API key ni backend. El cliente detecta la firma gzip en los bytes recibidos: admite archivos comprimidos y servidores con `Content-Encoding: gzip` (Fetch ya los descomprime). Valida tamaños y estructura antes de generar mallas. Los errores terminales muestran un botón para recargar; errores de atributos permiten seguir explorando.
 
 ## Verificar
 
 ```sh
 .venv/bin/python -m unittest discover -s tests -v
-npm run test:mesh
+npm test
 npm run validate:city
 npm run check
 npm run build
@@ -51,9 +51,13 @@ Prueba en navegador con una muestra de **800 volúmenes reales**, aislada median
 .venv/bin/python scripts/mesh-test-fixture.py
 npx playwright install chromium
 npm run test:browser
+npm run test:browser:negative
+npm run test:browser:city
 ```
 
-Para un Chromium ya instalado: `CHROMIUM_PATH=/ruta/al/ejecutable npm run test:browser`. La prueba comprueba shaders, selección, navegación sin volver a solicitar paquetes, tamaño móvil y movimiento reducido. No es un benchmark de toda CABA.
+Para un Chromium ya instalado: `CHROMIUM_PATH=/ruta/al/ejecutable npm run test:browser`. Mantener `npm run dev` abierto durante las pruebas. `test:browser` usa la muestra para selección conocida, móvil y controles; `test:browser:negative` inyecta errores después de una carga parcial. `test:browser:city` usa toda la entrega local y exige conjuntos exactos de bloques/paquetes, volúmenes completos y continuidad al navegar. Los informes `docs/browser-*.json` registran `running`, `passed` o `failed`, incluso ante fallos de lanzamiento. Son pruebas funcionales con SwiftShader, no benchmarks de hardware.
+
+Para verificar la versión de producción: `npm run build`, luego `npm run preview` en otra terminal y `BROWSER_BASE_URL=http://127.0.0.1:4173 BROWSER_REPORT=docs/browser-preview.json npm run test:browser:city`. `CHROMIUM_PATH` también se aplica a esa orden. El timeout completo predeterminado es 10 minutos; puede ajustarse con `CITY_TIMEOUT_MS`.
 
 ## Datos y límites
 

@@ -1,4 +1,6 @@
-# Validación · 2026-10-14
+# Historial de validación · desde 2026-10-14
+
+**Estado actual y pruebas vigentes:** `resident-validation-notes.md`. Este documento conserva resultados históricos; no usar sus pendientes o comandos de la versión MVT como descripción de la interfaz actual.
 
 La sección inicial describe la primera entrega GeoJSON. La iteración CABA en teselas se documenta al final; historias ya no forman parte de la interfaz.
 

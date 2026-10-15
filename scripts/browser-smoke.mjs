@@ -1,52 +1,39 @@
-import {chromium} from '@playwright/test';
-import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const executablePath=process.env.CHROMIUM_PATH;
-const browser=await chromium.launch({...(executablePath?{executablePath}:{}),headless:true,args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-const page=await browser.newPage({viewport:{width:1280,height:850},deviceScaleFactor:1});
-const errors=[],requests=[];
-page.on('pageerror',e=>errors.push(e.message));
-page.on('console',m=>{if(m.type()==='error'&&!m.text().includes('ERR_FAILED'))errors.push(m.text())});
-await page.route('https://tile.openstreetmap.org/**',route=>route.abort());
-await page.route('**/data/city/**',async route=>{
-  const name=new URL(route.request().url()).pathname.split('/').at(-1);
-  requests.push(name);
-  const body=await readFile(`data/processed/browser-fixture/${name}`);
-  await route.fulfill({body,contentType:name==='city.json'?'application/json':'application/octet-stream'});
+import {baseURL,reportRun,observe,fixture,ready,clean,screenshot,validate} from './browser-helpers.mjs';
+await reportRun(process.env.BROWSER_REPORT||'docs/browser-smoke.json',async (browser,report)=>{
+ const anchors=JSON.parse(await readFile('data/processed/browser-fixture/selection.json','utf8'));assert.ok(anchors.length);
+ const tests=[];report.tests=tests;
+ for(const dpr of (process.env.SMOKE_ATTRIBUTES_ONLY?[]:[1,2])){
+  console.log(`DPR ${dpr}: inicio`);const page=await browser.newPage({viewport:{width:1280,height:850},deviceScaleFactor:dpr,reducedMotion:'reduce'}),e=await observe(page),m=await fixture(page);
+  report.current_evidence=e;
+  const anchor=anchors[0],url=`${baseURL}/?lng=${anchor.lng}&lat=${anchor.lat}&zoom=19&pitch=0&bearing=0&mode=height`;
+  await page.goto(url);await ready(page,m,30000);await page.waitForTimeout(1000);const requests=e.geometry_requests.length;
+  const pick=async()=>{if(await page.locator('.detail').count())await page.getByRole('button',{name:'Cerrar selección',exact:true}).click();assert.equal(await page.locator('.detail').count(),0,'Each pick starts with empty selection');const box=await page.locator('.maplibregl-canvas').boundingBox();let found=false;const camera=new URL(page.url()).searchParams,mpp=40075016.686*Math.cos(anchor.lat*Math.PI/180)/(512*2**Number(camera.get('zoom'))),roofOffset=-(anchor.height||0)*Math.sin(Number(camera.get('pitch'))*Math.PI/180)/mpp;for(const dy of [...new Set([roofOffset,roofOffset*1.2,roofOffset*0.8,0,-30,-60,-90,-120,-150,-180,-210,-240,-270,-300,30])]){if(await page.locator('.detail').count())await page.getByRole('button',{name:'Cerrar selección',exact:true}).click();assert.equal(await page.locator('.detail').count(),0);await page.mouse.click(box.x+box.width/2,box.y+box.height/2+dy);await page.waitForFunction(id=>document.querySelector('.detail .eyebrow')?.textContent===`VOLUMEN · ${id}`,anchor.source_id,{timeout:1500}).catch(()=>{});if((await page.locator('.detail .eyebrow').allTextContents()).includes(`VOLUMEN · ${anchor.source_id}`)){found=true;break}}assert.ok(found,`Known fixture ID ${anchor.source_id} must be selected, DPR ${dpr}`)};
+  assert.equal(await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches),true);await pick();await screenshot(page,`desktop-dpr${dpr}`);
+  await page.getByRole('button',{name:'Vista 3D',exact:true}).click();await page.waitForTimeout(300);await pick();console.log(`DPR ${dpr}: nueva selección tras cámara/tamaño`);
+  await page.setViewportSize({width:1000,height:700});await page.waitForTimeout(300);await pick();console.log(`DPR ${dpr}: nueva selección tras cámara/tamaño`);
+  await page.getByRole('button',{name:'Ver toda CABA',exact:true}).click();await page.waitForTimeout(300);await page.mouse.click(800,300);await page.waitForTimeout(500);await screenshot(page,'blank-probe');assert.equal(await page.locator('.detail').count(),0,'Blank click clears selection');
+  const canvas=page.locator('.maplibregl-canvas');const still=await canvas.screenshot();await page.getByRole('button',{name:'Animar volúmenes',exact:true}).click();await page.waitForTimeout(400);assert.ok(still.equals(await canvas.screenshot()),'Reduced motion replay keeps geometry pixels unchanged');
+  await page.getByRole('button',{name:'Antigüedad',exact:true}).click();assert.equal(new URL(page.url()).searchParams.get('mode'),'year');
+  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);
+  const toggle=page.getByRole('button',{name:/Contraer panel|Explorar · abrir panel/});if(await toggle.getAttribute('aria-expanded')==='true')await toggle.click();assert.equal(await toggle.getAttribute('aria-expanded'),'false');await screenshot(page,`mobile-dpr${dpr}`);const oldZoom=Number(new URL(page.url()).searchParams.get('zoom'));await page.getByRole('button',{name:'Acercar',exact:true}).click();await page.waitForFunction(zoom=>Number(new URL(location.href).searchParams.get('zoom'))>zoom,oldZoom);await toggle.click();assert.equal(await toggle.getAttribute('aria-expanded'),'true');
+  assert.equal(e.geometry_requests.length,requests);validate(await page.evaluate(()=>window.__cityDiagnostics),m);clean(e);const savedURL=page.url();console.log(`DPR ${dpr}: URL móvil ${savedURL}`);await page.reload();await ready(page,m,30000);assert.equal(new URL(page.url()).searchParams.get('mode'),'year');assert.equal(await page.getByRole('button',{name:'Antigüedad',exact:true}).getAttribute('aria-pressed'),'true');for(const key of ['lng','lat','zoom','pitch','bearing'])assert.ok(Math.abs(Number(new URL(page.url()).searchParams.get(key))-Number(new URL(savedURL).searchParams.get(key)))<0.01);clean(e);tests.push({dpr,expected_source_id:anchor.source_id,gpu_pick_topdown_tilt_resize:true,selection_cleared_before_each_pick:true,blank_selection:true,mobile_panel:true,mobile_zoom_control:true,url_mode:true,url_reload_restores_camera:true,reduced_motion_pixel_stability:true,...e});await page.close();
+ }
+ if(!process.env.SMOKE_ATTRIBUTES_ONLY){const stale=await browser.newPage({viewport:{width:1280,height:850},reducedMotion:'reduce'});const staleEvidence=await observe(stale);let release,requested=false;
+ const deferred=new Promise(resolve=>{release=resolve});
+ const sm=await fixture(stale,async(route,name)=>{if(name==='attrs0.json.gz'){requested=true;await deferred;return false}return false});
+ const a=anchors[0];await stale.goto(`${baseURL}/?lng=${a.lng}&lat=${a.lat}&zoom=19&pitch=0&bearing=0`);await ready(stale,sm,30000);await stale.waitForTimeout(1200);
+ const box=await stale.locator('.maplibregl-canvas').boundingBox();await stale.mouse.click(box.x+box.width/2,box.y+box.height/2);
+ await stale.waitForFunction(()=>document.body.innerText.includes('Cargando datos del volumen'),null,{timeout:5000});assert.ok(requested);
+ await stale.getByRole('button',{name:'Ver toda CABA',exact:true}).click();await stale.waitForTimeout(300);await stale.mouse.click(1000,300);release();await stale.waitForTimeout(500);
+ assert.equal(await stale.locator('.detail').count(),0,'Late attributes must not restore cleared selection');validate(await stale.evaluate(()=>window.__cityDiagnostics),sm);clean(staleEvidence);tests.push({stale_attributes_ignored:true});await stale.close();}
+ const attrPage=await browser.newPage({viewport:{width:1280,height:850},reducedMotion:'reduce'});const attrEvidence=await observe(attrPage);const am=await fixture(attrPage,async(route,name)=>{if(name!=='attrs0.json.gz')return false;await route.fulfill({status:503,body:'Injected attribute error'});return true});
+ const first=anchors.find(a=>a.tile_id==='0'),second=anchors.find(a=>a.tile_id==='1');assert.ok(first&&second);const lng=(first.lng+second.lng)/2,lat=(first.lat+second.lat)/2,zoom=16;
+ await attrPage.goto(`${baseURL}/?lng=${lng}&lat=${lat}&zoom=${zoom}&pitch=0&bearing=0`);await ready(attrPage,am,30000);await attrPage.waitForTimeout(1000);const geometryBefore=attrEvidence.geometry_requests.length;
+ const project=async a=>{const box=await attrPage.locator('.maplibregl-canvas').boundingBox(),q=new URL(attrPage.url()).searchParams,scale=512*2**Number(q.get('zoom')),world=p=>[(p.lng+180)/360*scale,(1-Math.asinh(Math.tan(p.lat*Math.PI/180))/Math.PI)/2*scale],center=world({lng:Number(q.get('lng')),lat:Number(q.get('lat'))}),point=world(a),mpp=40075016.686*Math.cos(Number(q.get('lat'))*Math.PI/180)/scale,distance=box.height/(2*Math.tan(0.6435011087932844/2)),roofScale=distance/(distance-(a.height||0)/mpp);return [box.x+box.width/2+(point[0]-center[0])*roofScale,box.y+box.height/2+(point[1]-center[1])*roofScale]};
+ await attrPage.mouse.click(...await project(first));await attrPage.waitForFunction(()=>document.querySelector('[role="alert"]')?.textContent.includes('attrs0.json.gz'),null,{timeout:10000});assert.equal(await attrPage.evaluate(()=>window.__cityDiagnostics.phase),'ready');
+ const renders=await attrPage.evaluate(()=>window.__cityDiagnostics.renders);await attrPage.getByRole('button',{name:'Acercar',exact:true}).click();await attrPage.waitForFunction(n=>window.__cityDiagnostics.renders>n,renders);await attrPage.waitForTimeout(400);await attrPage.getByRole('button',{name:'Alejar',exact:true}).click();await attrPage.waitForFunction(()=>Number(new URL(location.href).searchParams.get('zoom'))===16);await attrPage.waitForTimeout(200);
+ await attrPage.mouse.click(...await project(second));await attrPage.waitForFunction(id=>document.querySelector('.detail .eyebrow')?.textContent===`VOLUMEN · ${id}`,second.source_id,{timeout:10000});validate(await attrPage.evaluate(()=>window.__cityDiagnostics),am);assert.equal(attrEvidence.geometry_requests.length,geometryBefore);assert.equal(await attrPage.locator('[role="alert"]').count(),0);assert.ok(attrEvidence.errors.every(error=>error.includes('attrs0.json.gz')&&error.includes('503')),JSON.stringify(attrEvidence.errors));assert.deepEqual(attrEvidence.request_failures,[]);await screenshot(attrPage,'attribute-error-recovery');tests.push({expected_attribute_errors:attrEvidence.errors,attribute_failure_keeps_city_ready:true,other_tile_selection_after_attribute_error:second.source_id,geometry_requests:geometryBefore});await attrPage.close();
+ return {fixture:'800 volúmenes reales de CABA',test_scope:process.env.SMOKE_ATTRIBUTES_ONLY?'sólo atributos':'GPU, móvil, URL, selección y atributos',tests};
 });
-try{
-  await page.goto('http://127.0.0.1:5173');
-  await page.waitForFunction(()=>!document.querySelector('nav button')?.hasAttribute('disabled'));
-  await page.waitForTimeout(4000);
-  assert.equal(await page.locator('.error').count(),0,await page.locator('.error').allTextContents());
-  assert.equal(errors.length,0,errors.join('\n'));
-  await mkdir('data/processed/browser-check',{recursive:true});
-  await page.screenshot({path:'data/processed/browser-check/desktop.png'});
-  // Find a selectable real volume, without assuming screen coordinates of any identifier.
-  let selected=false;
-  for(let y=280;y<760&&!selected;y+=35)for(let x=450;x<1190&&!selected;x+=35){
-    await page.mouse.click(x,y);await page.waitForTimeout(30);
-    selected=await page.locator('.detail').count()>0;
-  }
-  assert.ok(selected,'GPU picking must select a real source volume');
-  const selectedText=await page.locator('.detail').innerText();
-  assert.ok(selectedText.includes('SMP'));
-  const packsBefore=requests.filter(n=>n.startsWith('pack')).length;
-  await page.getByRole('button',{name:'Alejar',exact:true}).click({clickCount:4,delay:100});
-  await page.waitForTimeout(1500);
-  await page.mouse.move(900,450);await page.mouse.down();await page.mouse.move(650,550,{steps:12});await page.mouse.up();
-  await page.getByRole('button',{name:'Inicio',exact:true}).click();await page.waitForTimeout(2200);
-  assert.equal(requests.filter(n=>n.startsWith('pack')).length,packsBefore,'Moving/zooming must not reload geometry');
-  await page.getByRole('button',{name:'Antigüedad',exact:true}).click();
-  await page.getByRole('button',{name:'Animar volúmenes',exact:true}).click();await page.waitForTimeout(1800);
-  assert.equal(errors.length,0,errors.join('\n'));
-  await page.setViewportSize({width:390,height:844});
-  await page.emulateMedia({reducedMotion:'reduce'});
-  await page.getByRole('button',{name:'Alturas',exact:true}).click();
-  await page.waitForTimeout(800);
-  await page.screenshot({path:'data/processed/browser-check/mobile.png'});
-  assert.equal(errors.length,0,errors.join('\n'));
-  const result={fixture:'800 real central-CABA source volumes',shader_errors:errors,geometry_pack_requests:packsBefore,geometry_requests_after_navigation:requests.filter(n=>n.startsWith('pack')).length,gpu_picking:true,mobile_resize:true,reduced_motion:true,selectedText};
-  await writeFile('docs/browser-smoke.json',JSON.stringify(result,null,2)+'\n');
-  console.log(result);
-}catch(e){await page.screenshot({path:'/tmp/3d-baires-browser-failure.png'});console.log('ERRORS',errors,await page.locator('body').innerText());throw e}finally{await browser.close()}

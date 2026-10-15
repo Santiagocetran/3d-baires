@@ -1,12 +1,15 @@
 // Persistent meshes, attribute textures, shader entrance and GPU picking adapted from
 // alexbarakov/amsterdam-by-building web/app.js (MIT). See licenses/ and docs/amsterdam-architecture.md.
 import * as THREE from 'three';
-import maplibregl,{type CustomLayerInterface,type Map as MapInstance,type MapMouseEvent} from 'maplibre-gl';
-import type {MeshData} from './city-mesh';
+import * as maplibregl from 'maplibre-gl';
+import {type CustomLayerInterface,type Map as MapInstance,type MapMouseEvent} from 'maplibre-gl';
+import {validateMeshIdentity,type MeshData} from './city-mesh';
 export type Building=Record<string,string|number|null>;
-type Tile={id:string;origin:[number,number];n:number;pack:string;offset:number;length:number;attrs:string};
-export type CityConfig={origin:[number,number];cos_origin:number;max_source_row:number;source_records:number;tiles:Tile[];packs:{file:string;bytes:number}[]};
-type Callbacks={progress:(loaded:number,total:number)=>void;select:(building:Building)=>void;error:(message:string)=>void};
+import {validateConfig,type CityConfig} from './city-config';
+import {loadPayload} from './city-transport';
+export type {CityConfig} from './city-config';
+export type CityDiagnostics={phase:'loading'|'ready'|'error'|'disposed';expectedBlocks:number;loadedBlocks:number;expectedVolumes:number;loadedVolumes:number;expectedPacks:number;validatedPacks:string[];loadedBlockIds:string[];requestAttempts:number;bufferBytes:number;retainedPackBytes:number;renders:number;error:string|null};
+type Callbacks={progress:(loaded:number,total:number)=>void;select:(building:Building)=>void;error:(message:string)=>void;diagnostics?:(value:CityDiagnostics)=>void;selectionState?:(value:{phase:'idle'|'loading'|'ready'|'error';error?:string})=>void};
 const WIDTH=256;
 const vertex=/*glsl*/`
   in float bld;
@@ -58,13 +61,12 @@ const fragment=/*glsl*/`
     #endif
   }
 `;
-async function unzip(url:string,signal:AbortSignal){
-  const r=await fetch(url,{signal});
-  if(!r.ok)throw new Error(`No se pudo cargar ${url}: HTTP ${r.status}`);
-  if(!r.body)throw new Error('Respuesta vacía');
-  return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
-}
 export function createResidentCity(config:CityConfig,callbacks:Callbacks){
+  const packSizes=validateConfig(config);
+  const diagnostics:CityDiagnostics={phase:'loading',expectedBlocks:config.tiles.length,loadedBlocks:0,expectedVolumes:config.source_records,loadedVolumes:0,expectedPacks:config.packs.length,validatedPacks:[],loadedBlockIds:[],requestAttempts:0,bufferBytes:0,retainedPackBytes:0,renders:0,error:null};
+  const snapshot=():CityDiagnostics=>({...diagnostics,validatedPacks:[...diagnostics.validatedPacks],loadedBlockIds:[...diagnostics.loadedBlockIds]});
+  const emit=()=>callbacks.diagnostics?.(snapshot());
+  const assignments=new Map<Worker,number>();
   const abort=new AbortController(),scene=new THREE.Scene(),camera=new THREE.Camera();
   const uniforms={uNow:{value:0},uReduced:{value:matchMedia('(prefers-reduced-motion: reduce)').matches?1:0},uMode:{value:0},uSelected:{value:-1}};
   const meshes:THREE.Mesh<THREE.BufferGeometry,THREE.ShaderMaterial>[]=[];
@@ -80,15 +82,22 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
   const pickTarget=new THREE.WebGLRenderTarget(1,1,{minFilter:THREE.NearestFilter,magFilter:THREE.NearestFilter});
   const pickPixel=new Uint8Array(4);
   let renderer:THREE.WebGLRenderer,map:MapInstance,loaded=0,nextIndex=0,animateUntil=0,disposed=false,selectionVersion=0;
+  let renderFatal=false;
   let queuedPick:MapMouseEvent|undefined;
   const packs=new Map<string,Promise<ArrayBuffer>>();
   const remaining=new Map(config.packs.map(p=>[p.file,config.tiles.filter(t=>t.pack===p.file).length]));
-  const progress=()=>callbacks.progress(loaded,config.tiles.length);
+  function fail(e:unknown,fatal=false){renderFatal ||= fatal;if(diagnostics.phase==='error'||disposed)return;diagnostics.phase='error';diagnostics.error=e instanceof Error?e.message:String(e);abort.abort();pool.forEach(w=>w.terminate());packs.clear();diagnostics.retainedPackBytes=0;selectionVersion++;emit();callbacks.error(diagnostics.error)}
+  const progress=()=>{callbacks.progress(loaded,config.tiles.length);emit()};
+  const attempt=()=>{diagnostics.requestAttempts++;emit()};
   function makeMaterial(tex:THREE.DataTexture,pick:boolean,born:{value:number},altitude:number){
     return new THREE.ShaderMaterial({glslVersion:THREE.GLSL3,uniforms:{...uniforms,uAttr:{value:tex},uBorn:born,uAltitude:{value:altitude}},
       vertexShader:vertex,fragmentShader:fragment,defines:pick?{PICK:1}:{},side:THREE.DoubleSide,blending:THREE.NoBlending,toneMapped:false});
   }
   function addTile(m:MeshData,id:number){
+    const t=config.tiles[id];
+    if(!t||diagnostics.loadedBlockIds.includes(t.id))throw new Error('Respuesta worker incompatible con bloque');
+    validateMeshIdentity(m,t.n,config.max_source_row,t.origin);
+    for(const gid of m.gids)if(rowToTile[gid])throw new Error('Identidad de volumen duplicada');
     const g=new THREE.BufferGeometry();
     g.setAttribute('position',new THREE.BufferAttribute(m.pos,3));g.setAttribute('bld',new THREE.BufferAttribute(m.bld,1));g.setIndex(new THREE.BufferAttribute(m.idx,1));
     // Full geometry always resident. Frustum culling only skips drawing, never evicts it.
@@ -102,38 +111,41 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
     mesh.position.set(m.origin[0],0,m.origin[1]);
     mesh.userData={draw:mesh.material,pick:makeMaterial(tex,true,born,altitude),tex,born};
     for(const gid of m.gids)rowToTile[gid]=id+1;
-    scene.add(mesh);meshes.push(mesh);map.triggerRepaint();
+    scene.add(mesh);meshes.push(mesh);
+    diagnostics.loadedBlocks++;diagnostics.loadedVolumes+=m.nB;diagnostics.loadedBlockIds.push(t.id);diagnostics.bufferBytes+=m.pos.byteLength+m.bld.byteLength+m.idx.byteLength+data.byteLength;map.triggerRepaint();
   }
   async function next(worker:Worker){
-    if(disposed)return;
+    if(disposed||diagnostics.phase==='error')return;
     const id=nextIndex++,t=config.tiles[id];if(!t){worker.terminate();return}
     try{
-      if(!packs.has(t.pack))packs.set(t.pack,unzip(`/data/city/${t.pack}`,abort.signal));
+      if(!packs.has(t.pack))packs.set(t.pack,loadPayload(`/data/city/${t.pack}`,abort.signal,packSizes.get(t.pack)!,attempt,packSizes.get(t.pack)!).then(buf=>{if(abort.signal.aborted)throw new Error('Carga cancelada');diagnostics.validatedPacks.push(t.pack);diagnostics.retainedPackBytes+=buf.byteLength;emit();return buf}));
       const pack=await packs.get(t.pack)!;
-      if(disposed)return;
+      if(disposed||abort.signal.aborted)return;
       const buf=pack.slice(t.offset,t.offset+t.length);
       if(buf.byteLength!==t.length)throw new Error(`Paquete truncado: ${t.pack}`);
-      const left=remaining.get(t.pack)!-1;remaining.set(t.pack,left);if(left===0)packs.delete(t.pack);
-      worker.postMessage({buf,id},[buf]);
-    }catch(e){if(!disposed)callbacks.error(e instanceof Error?e.message:String(e))}
+      const left=remaining.get(t.pack)!-1;remaining.set(t.pack,left);if(left===0){packs.delete(t.pack);diagnostics.retainedPackBytes-=pack.byteLength;}
+      assignments.set(worker,id);worker.postMessage({buf,id},[buf]);
+    }catch(e){fail(e)}
   }
   async function showBuilding(gid:number){
     const version=++selectionVersion;
-    if(gid<0||!rowToTile[gid])return;
+    if(gid<0||!rowToTile[gid]){uniforms.uSelected.value=-1;map.triggerRepaint();callbacks.selectionState?.({phase:'idle'});return;}
+    callbacks.selectionState?.({phase:'loading'});
     uniforms.uSelected.value=gid;map.triggerRepaint();
     const tileIndex=rowToTile[gid]-1;
     try{
       let attrs=attrsCache.get(tileIndex);
       if(!attrs){
-        const buffer=await unzip(`/data/city/${config.tiles[tileIndex].attrs}`,abort.signal);
+        const buffer=await loadPayload(`/data/city/${config.tiles[tileIndex].attrs}`,abort.signal,32e6,attempt);
         attrs=JSON.parse(new TextDecoder().decode(buffer)) as Building[];
+        if(!Array.isArray(attrs)||attrs.length!==config.tiles[tileIndex].n||attrs.some(a=>!a||typeof a!=='object'||!Number.isInteger(a.source_row)||rowToTile[Number(a.source_row)]!==tileIndex+1)||new Set(attrs.map(a=>a.source_row)).size!==attrs.length)throw new Error('Atributos inválidos');
         if(attrsCache.size>=8)attrsCache.delete(attrsCache.keys().next().value!);
         attrsCache.set(tileIndex,attrs);
       }
       const building=attrs.find(p=>p.source_row===gid);
       if(!building)throw new Error(`No se encontraron atributos para ${gid}`);
-      if(!disposed&&version===selectionVersion)callbacks.select(building);
-    }catch(e){if(!disposed)callbacks.error(e instanceof Error?e.message:String(e))}
+      if(!disposed&&version===selectionVersion){callbacks.select(building);callbacks.selectionState?.({phase:'ready'})}
+    }catch(e){if(!disposed&&version===selectionVersion)callbacks.selectionState?.({phase:'error',error:e instanceof Error?e.message:String(e)})}
   }
   function pick(e:MapMouseEvent){
     const {width:w,height:h}=map.getCanvas().getBoundingClientRect();
@@ -141,49 +153,55 @@ export function createResidentCity(config:CityConfig,callbacks:Callbacks){
     const crop=new THREE.Matrix4().set(w,0,0,w-2*e.point.x-1, 0,h,0,-h+2*e.point.y+1, 0,0,1,0, 0,0,0,1);
     camera.projectionMatrix.copy(crop.multiply(fullMatrix));
     for(const mesh of meshes)mesh.material=mesh.userData.pick;
-    renderer.setRenderTarget(pickTarget);renderer.setClearColor(0x000000,0);renderer.clear();renderer.render(scene,camera);
+    try{renderer.setRenderTarget(pickTarget);renderer.setClearColor(0x000000,0);renderer.clear();renderer.render(scene,camera);
     renderer.readRenderTargetPixels(pickTarget,0,0,1,1,pickPixel);
-    renderer.setRenderTarget(null);camera.projectionMatrix.copy(fullMatrix);
-    for(const mesh of meshes)mesh.material=mesh.userData.draw;
+    }finally{renderer.setRenderTarget(null);camera.projectionMatrix.copy(fullMatrix);
+    for(const mesh of meshes)mesh.material=mesh.userData.draw;renderer.resetState();}
     void showBuilding(pickPixel[0]+256*pickPixel[1]+65536*pickPixel[2]-1);
   }
+  const onContextLost=()=>fail('Se perdió el contexto WebGL. Recargá para reintentar.',true);
   const onClick=(e:MapMouseEvent)=>{queuedPick=e;map.triggerRepaint()};
   const onMotion=()=>{uniforms.uReduced.value=media.matches?1:0;map.triggerRepaint()};
   const layer:CustomLayerInterface={id:'resident-city',type:'custom',renderingMode:'3d',
     onAdd(m,gl){
       map=m;
-      renderer=new THREE.WebGLRenderer({canvas:m.getCanvas(),context:gl as WebGL2RenderingContext});
+      try{renderer=new THREE.WebGLRenderer({canvas:m.getCanvas(),context:gl as WebGL2RenderingContext});
       renderer.autoClear=false;renderer.outputColorSpace=THREE.LinearSRGBColorSpace;
-      renderer.debug.onShaderError=()=>callbacks.error('No se pudo compilar el renderizador 3D. Revisá el soporte WebGL2.');
+      renderer.debug.onShaderError=()=>fail('No se pudo compilar el renderizador 3D. Revisá el soporte WebGL2.',true);
+      m.getCanvas().addEventListener('webglcontextlost',onContextLost,true);
       map.on('click',onClick);media.addEventListener('change',onMotion);progress();
       for(let i=0;i<Math.min(2,navigator.hardwareConcurrency||2);i++){
         const worker=new Worker(new URL('./city.worker.ts',import.meta.url),{type:'module'});pool.push(worker);
         worker.onmessage=({data}:{data:MeshData&{id:number;error?:string}})=>{
-          if(disposed)return;
-          if(data.error){callbacks.error(data.error);return}
-          addTile(data,data.id);loaded++;progress();void next(worker);
+          if(disposed||diagnostics.phase==='error')return;
+          try{if(data.id!==assignments.get(worker))throw new Error('Respuesta worker sin asignación válida');assignments.delete(worker);if(data.error)throw new Error(data.error);addTile(data,data.id);loaded++;progress();void next(worker)}catch(e){fail(e)}
         };
-        worker.onerror=()=>callbacks.error('Falló la preparación de una malla 3D. Recargá para reintentar.');
+        worker.onerror=()=>fail('Falló la preparación de una malla 3D. Recargá para reintentar.');
+        worker.addEventListener('messageerror',()=>fail('Respuesta worker ilegible'));
         void next(worker);
-      }
+      }}catch(e){fail(e,!renderer)}
     },
     render(_gl,args){
-      uniforms.uNow.value=performance.now()/1000;
+      if(disposed||renderFatal||!renderer)return;
+      try{uniforms.uNow.value=performance.now()/1000;
       fullMatrix.fromArray(args.defaultProjectionData.mainMatrix).multiply(model);camera.projectionMatrix.copy(fullMatrix);
       renderer.resetState();
       renderer.setViewport(0,0,map.getCanvas().width,map.getCanvas().height);
-      if(queuedPick){const e=queuedPick;queuedPick=undefined;pick(e);renderer.resetState()}
+      if(queuedPick&&diagnostics.phase!=='error'){const e=queuedPick;queuedPick=undefined;pick(e);renderer.resetState()}
       renderer.render(scene,camera);
+      if(renderFatal)return;
+      diagnostics.renders++;if(diagnostics.phase==='loading'&&loaded===config.tiles.length&&diagnostics.loadedVolumes===config.source_records&&diagnostics.validatedPacks.length===config.packs.length){diagnostics.phase='ready';emit();}
       if(uniforms.uNow.value<animateUntil&&uniforms.uReduced.value===0)map.triggerRepaint();
+      }catch(e){fail(e,true)}
     },
     onRemove(){
-      disposed=true;abort.abort();selectionVersion++;pool.forEach(w=>w.terminate());packs.clear();attrsCache.clear();
-      map.off('click',onClick);media.removeEventListener('change',onMotion);
+      disposed=true;if(diagnostics.phase!=='error')diagnostics.phase='disposed';diagnostics.retainedPackBytes=0;emit();abort.abort();selectionVersion++;pool.forEach(w=>w.terminate());packs.clear();attrsCache.clear();
+      map.getCanvas().removeEventListener('webglcontextlost',onContextLost,true);map.off('click',onClick);media.removeEventListener('change',onMotion);
       for(const mesh of meshes){mesh.geometry.dispose();mesh.userData.draw.dispose();mesh.userData.pick.dispose();mesh.userData.tex.dispose()}
-      scene.clear();pickTarget.dispose();renderer.dispose();
+      scene.clear();pickTarget.dispose();renderer?.dispose();
     }
   };
-  return {layer,setMode(mode:'height'|'year'){uniforms.uMode.value=mode==='year'?1:0;map?.triggerRepaint()},
-    clearSelection(){selectionVersion++;uniforms.uSelected.value=-1;map?.triggerRepaint()},
+  return {layer,getDiagnostics:snapshot,setMode(mode:'height'|'year'){uniforms.uMode.value=mode==='year'?1:0;map?.triggerRepaint()},
+    clearSelection(){selectionVersion++;callbacks.selectionState?.({phase:'idle'});uniforms.uSelected.value=-1;map?.triggerRepaint()},
     replay(){const now=performance.now()/1000;for(const mesh of meshes)mesh.userData.born.value=now;animateUntil=now+1.4;map.triggerRepaint()}};
 }

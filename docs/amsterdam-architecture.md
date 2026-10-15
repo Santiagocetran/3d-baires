@@ -31,3 +31,11 @@ Entrada longitud/latitud WGS84 → EPSG:3857 con `always_xy=True`. Se resta el o
 La residencia completa intercambia menos interrupciones al navegar por mayor memoria inicial. No se promete el mismo FPS que Amsterdam ni soporte de móviles de poca memoria sin medirlo. Los paquetes de geometría se descargan una sola vez por sesión y se mantienen como mallas; al cerrar se liberan workers, geometrías, texturas y materiales. El mapa base OSM sigue siendo un mapa de teselas y puede realizar nuevas solicitudes al navegar.
 
 Fuentes técnicas: [Three.js con MapLibre](https://maplibre.org/maplibre-gl-js/docs/examples/adding-3d-models-using-threejs-on-terrain/) y código de MapLibre instalado para `CustomLayerInterface`.
+
+## Revisión del 2026-10-15
+
+Se comparó el commit adaptado con `4d541802cc47257ce899cc1c75871346c6675c2d` del repositorio público. La arquitectura de mallas residentes no cambió; las diferencias principales son recorridos, grafo y contenido curado, fuera del enfoque actual. El panel plegable inspira nuestra mejora móvil. No se reutilizaron años suavizados/estimados, historias ni imágenes. SimCABA conserva valor como referencia de exploración, no como fuente de huellas/alturas medibles.
+
+La adaptación añade validación estricta de manifiesto y CBA1, transporte compatible con gzip de archivo/HTTP, estado terminal explícito, errores de atributos independientes y diagnósticos de residencia. La residencia describe buffers CPU conservados en la escena. Three.js crea recursos GPU al dibujar; no se afirma que toda la ciudad esté subida a GPU al terminar la carga ni que 431 MB sea su memoria total.
+
+MapLibre se actualizó de 5.6.0 a 6.4.1 por [GHSA-jrc7-96c5-q579](https://github.com/maplibre/maplibre-gl-js/security/advisories/GHSA-jrc7-96c5-q579): el aviso afecta atribuciones HTML no confiables. Actualmente las atribuciones son constantes propias, pero se prefirió corregir la dependencia antes de futuras fuentes. La versión introduce módulos ESM/worker separado, integrado explícitamente con Vite. Vite 6.4.4 elimina los avisos del servidor de desarrollo detectados; `npm audit` quedó sin vulnerabilidades en esta revisión. No es una garantía sobre avisos futuros.
